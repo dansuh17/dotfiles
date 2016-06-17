@@ -34,6 +34,8 @@ set exrc                " if found, use local .vimrc
 set secure              " restrict some commands in non-default .vimrc
 
 " set makeprg=make\ -C\ ../build\ -j9   " allows vim to use :make
+" :set paste  " this removes side-effects from copy-and-pasting
+" :set nopaste " undo paste
 
 " set path variable for searching include files
 " Directories are comma-separated
@@ -48,6 +50,7 @@ cs add ../cscope.out
 nmap <F7> :NERDTreeToggle<CR>
 nmap <F4> :make!<CR>
 "nmap <F5> :!./my_program<CR> "This way you can launch a project
+imap <Tab> <C-P>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
@@ -127,3 +130,10 @@ let g:UltiSnipsExpandTrigger="<F3>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" You Complete Me settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_global_ycm_extra_conf ='~/.ycm_extra_conf.py'
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_confirm_extra_conf = 0

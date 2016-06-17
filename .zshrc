@@ -89,7 +89,7 @@ alias vim='mvim -v'
 
 # the ubiquitos 'll' : directories first, with alphanumeric sorting:
 alias f='open -a Finder ./' #open current directory in finder
-alias ctags="usr/local/Cellar/ctags/5.8_1/bin/ctags"
+alias ctags="/usr/local/Cellar/ctags/5.8_1/bin/ctags"
 
 # temporary path aliases
 alias kaist='cd ~/Documents/KAIST/'

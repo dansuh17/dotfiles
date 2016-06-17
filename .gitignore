@@ -6,3 +6,5 @@
 !*.bash_profile
 !*.zshrc
 !.gitignore
+!.ycm_extra_conf.py
+
