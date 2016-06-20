@@ -1,137 +1,137 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle Settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible		" required
-filetype plugin indent off
-runtime macros/matchit.vim
-syntax off			" required
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" :PluginList, :PluginInstall, :PluginClean, :PluginSearch
+set nocompatible
+filetype off
 
- "set runtime path to include Vundle and initialize
+" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-
- "start vundle environment
 call vundle#begin()
- "alternatively, pass a path where Vundle should install plugins
- "call vundle#begin('~/some/path/here')
+" algernatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
- "list of plugins
- "let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'surround.vim'
-Plugin 'ctags.vim'
-Plugin 'The-NERD-tree'
-Plugin 'vim-airline/vim-airline'
-Plugin 'wincent/command-t'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'joshdick/onedark.vim'
-Plugin 'ggreer/the_silver_searcher'
-Plugin 'SirVer/ultisnips'   "Snippet engine
-Plugin 'honza/vim-snippets' "Snippets themselves
-
-"add plugins before this
-call vundle#end()
-
-"now (after vundle finished) it is safe to turn filetype plugins on
-filetype plugin indent on
-syntax on
-
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" NOTE that some of these plugins will not properly work if
+" the editor is not macvim.
+" Use 'brew install macvim --with-override-system-vim' command
+" to properly install macvim on OSX.
 "
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim' 		       " required
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'chriskempson/base16-vim'         " base-16 colorthemes
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'  " themes for airline
+Plugin 'edkolev/tmuxline.vim'						 " apply airline-synced theme to tmux
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'							 " snippets for ultisnips
+Plugin 'kien/ctrlp.vim'									 " fuzzy finder
+Plugin 'fugitive.vim'
+Plugin 'The-NERD-tree'
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General Settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" formatting
-set nu
+" All of your plugins must be added before the following line
+call vundle#end()
+filetype plugin indent on
+syntax enable
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Basic Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" formattings and editor functionalities
+set number				      " line number
+set relativenumber
 set autoindent
 set cindent
-set ts=2                " tab width
-set shiftwidth=2        " width of auto indenting
-
-" set format options, works along with 'textwidth'
-set formatoptions="r,c,o"
-set textwidth=0         " do not use text wrapping
-set colorcolumn=80      " mark 80th column
-set expandtab           " expand tab into spaces
-set scrolloff=3         " keep 3 lines when scrolling
+set tabstop=2
+set shiftwidth=2
+set ruler					      " indicate current position of cursor
+set showcmd				      " show incomplete commands
+set wildmenu
+set encoding=utf-8
+set term=xterm-256color	" enables airline within tmux
 
 " searching
-" type :nohl to disable highligh search matches
-set smartcase           " case insensitive if no upper case
-set hlsearch            " highlight search
-set incsearch           " preview search
+set smartcase
+set hlsearch
 
-set autowrite           " auto write when going off to other files
-set autoread            " auto read in when modified outside
-set ruler               " indicate current position of cursor
-set wildmenu            " wildmenu tab for :h
-set laststatus=2        " make airline appear all times
+" advanced
+set autowrite			      " auto write when going off to other files
+set autoread			      " auto read in when modified outside
 
-set sc                  " display incomplete commands 'showcmd'
-set complete=".,w,b,u,t,i"  " ins-completion options
-set completeopt="menu,preview,longest"
+" locality and security
+set exrc					      " if found, use local .vimrc
+set secure				      " restrict some commands in non-default .vimrc
 
-set exrc                " if found, use local .vimrc
-set secure              " restrict some commands in non-default .vimrc
+set nopaste				      " default is nopaste
+set pastetoggle=<F10>		" map paste toggle key
+" this is set because 'paste' disables all mappings
 
-" set makeprg=make\ -C\ ../build\ -j9   " allows vim to use :make
-
-" set paste
-set nopaste
-set pastetoggle=<F10>
-" since paste disables all mappings, this is a special
-" mapping for paste enabling / disabling
-
-" set path variable for searching include files
-" Directories are comma-separated
-set path=.,..,/usr/local/include,/usr/include,/Library/Frameworks
-" file paths fore possible tags files
+" dependencies and paths
 set tags=./tags,tags,../tags,../../tags
+" set path variable for searching include files
+set path=.,..,/usr/local/include,/Library/Frameworks
 cs add ../cscope.out
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" note that colortheme is selected within iTerm2!
+" no specific colortheme applied in .vimrc
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <F2> :bp<CR>
+nmap <F3> :bn<CR>
 nmap <F4> :make!<CR>
 nmap <F7> :NERDTreeToggle<CR>
-"nmap <F5> :!./my_program<CR> "This way you can launch a project
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colorscheme
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" file located in ~/.vim/colors
-" view :h 'rtp' for details
-colorscheme onedark
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" YouCompleteMe Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" YCM has to be compiled before using!
+" use --clang-compeleter option
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_key_list_select_completion=['<TAB>', '<Down>']
+let g:ycm_key_list_previous_completion=['<S-TAB>', '<Up>']
+let g:ycm_key_detailed_diagnostics='<leader>d'
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" airline settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-
-" Show just the filename in list of buffers
-let g:airline#extensions#tabline#fnamemod = ':t'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UltiSnipts settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<c-j>"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UltiSnips settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger="<c-x>" 		" 'x' for expand
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" You Complete Me settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_global_ycm_extra_conf ='~/.ycm_extra_conf.py'
-let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_confirm_extra_conf = 0
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" airline settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Enable ycm support
+let g:airline#extensions#ycm#enabled = 1
+" set error count prefix >
+let g:airline#extensions#ycm#error_symbol = 'E:'
+" set warning count prefix >
+let g:airline#extensions#ycm#warning_symbol = 'W:'
+" make airline appear all the time
+set laststatus=2
+" enable tmuxline integration
+" also, powerline/fonts is installed for status bar's
+" non-ascii character support
+let g:airline#extensions#tmuxline#enabled = 1
+" theme: goes well with base16_ocean
+let g:airline_theme='base16_monokai'
+" compatible with fugitive
+let g:airline#extension#branch#enabled = 1
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" base 16 settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" without this, the colors will be really no-jem
+let base16colorspace = 256
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tmuxline settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" enable all display options
+let g:tmuxline_preset = 'full'

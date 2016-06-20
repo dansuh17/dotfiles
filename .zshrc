@@ -6,8 +6,6 @@ export ZSH=/Users/deNsuh/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="re5et"
-# previously pygmalion!
-# looks good : mortalscumbag / fino-time / af-magic / crcandy
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -32,7 +30,7 @@ export UPDATE_ZSH_DAYS=13
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -55,9 +53,8 @@ plugins=(git colorize colored-man-pages)
 
 # User configuration
 
-export PATH="/Users/deNsuh/mvn/apache-maven-3.3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin"
+# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
-export EDITOR='mvim'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -82,28 +79,10 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Aliases
+# Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim='mvim -v'
+alias f='open -a Finder ./' # open current directory in finder
+alias ctags="usr/local/Cellar/ctags/5.8_1/bin/ctags"
+alias la='ls -a'
 
-# the ubiquitos 'll' : directories first, with alphanumeric sorting:
-alias f='open -a Finder ./' #open current directory in finder
-alias ctags="/usr/local/Cellar/ctags/5.8_1/bin/ctags"
-
-# temporary path aliases
-alias kaist='cd ~/Documents/KAIST/'
-alias denweb='cd /Users/deNsuh/Documents/denweb/deNsuh.github.io'
-alias chuckex='cd /Library/ChucK/examples'
-alias gchuck='cd ~/Documents/ChucK'
-alias canon='cd ~/Documents/ChucK/canon'
-alias cg='cd /Users/deNsuh/Documents/KAIST/16Spring/CG/projects/CS380'
-alias os_local='cd /Users/deNsuh/Documents/KAIST/16Spring/OS/'
-alias osans='cd /Users/deNsuh/Documents/KAIST/16Spring/OS/example/pintos/'
-alias goog='cd /Users/deNsuh/Documents/KAIST/16Spring/CS492/repo/admin'
-# amazon AWS ubuntu server
-alias aws='ssh -i "redhat_key.pem" ec2-user@ec2-52-78-43-212.ap-northeast-2.compute.amazonaws.com'
-# the password is my student ID
-alias os='ssh 4a@vc201.kaist.ac.kr'
-# the password is the name of the band
-alias os_master='ssh 4s@vc201.kaist.ac.kr'
