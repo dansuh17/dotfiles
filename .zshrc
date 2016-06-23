@@ -84,5 +84,12 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias f='open -a Finder ./' # open current directory in finder
 alias ctags="usr/local/Cellar/ctags/5.8_1/bin/ctags"
+
+# ls aliases
 alias la='ls -a'
+alias ll='ls -al'
+
+# tmux related aliases
+alias tls='tmux ls'
+alias ta='tmux attach -t'
 

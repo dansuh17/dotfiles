@@ -42,11 +42,12 @@ set number				      " line number
 set relativenumber
 set autoindent
 set cindent
-set tabstop=2
+set tabstop=2           " tap = 2 spaces
+set expandtab           " expand tab into spaces
 set shiftwidth=2
 set ruler					      " indicate current position of cursor
 set showcmd				      " show incomplete commands
-set wildmenu
+set wildmenu            " allow autocompletion with <tab>
 set encoding=utf-8
 set term=xterm-256color	" enables airline within tmux
 
@@ -94,6 +95,8 @@ let g:ycm_key_list_previous_completion=['<S-TAB>', '<Up>']
 let g:ycm_key_detailed_diagnostics='<leader>d'
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_confirm_extra_conf = 0
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UltiSnips settings

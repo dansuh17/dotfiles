@@ -70,6 +70,7 @@ flags = [
     '../llvm/include',
     '-isystem',
     '../llvm/tools/clang/include',
+    # this is where c / c++ headers are located
     '-isystem',
     '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1',
     '-isystem',
