@@ -29,6 +29,9 @@ Plugin 'kien/ctrlp.vim'									 " fuzzy finder
 Plugin 'fugitive.vim'
 Plugin 'The-NERD-tree'
 
+Plugin 'Shougo/vimproc.vim'              " chuck.vim depends on this
+Plugin 'highwaynoise/chuck.vim'          " chuck syntax highlighter and vm controller
+
 " All of your plugins must be added before the following line
 call vundle#end()
 filetype plugin indent on
@@ -79,6 +82,8 @@ cs add ../cscope.out
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap j gj
+nmap k gk
 nmap <F2> :bp<CR>
 nmap <F3> :bn<CR>
 nmap <F4> :make!<CR>

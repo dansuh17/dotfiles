@@ -93,3 +93,24 @@ alias ll='ls -al'
 alias tls='tmux ls'
 alias ta='tmux attach -t'
 
+# gst aliases
+alias gl1='gst-launch-1.0'
+alias gi1='gst-inspect-1.0'
+
+# amazon web
+alias aws='ssh -i "redhat_key.pem" ubuntu@ec2-52-78-70-33.ap-northeast-2.compute.amazonaws.com'
+
+# environment variables
+PATH=/opt/local/bin:$PATH
+export PATH
+# for oracle database fucking client
+PATH=$PATH:~/db/instantclient_12_1
+export PATH
+DYLD_LIBRARY_PATH=~/db/instantclient_12_1:$DYLD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH
+NLS_LANG=AMERICAN_CIS.UTF8
+export NLS_LANG
+
+export LC_ALL="C"
+
+# pip3 install location - /usr/local/lib/python3.5/site-packages
