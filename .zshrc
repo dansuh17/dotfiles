@@ -83,7 +83,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias f='open -a Finder ./' # open current directory in finder
-alias ctags="usr/local/Cellar/ctags/5.8_1/bin/ctags"
+alias ctags="/usr/local/Cellar/ctags/5.8_1/bin/ctags"
 
 # ls aliases
 alias la='ls -a'
@@ -98,7 +98,17 @@ alias gl1='gst-launch-1.0'
 alias gi1='gst-inspect-1.0'
 
 # amazon web
-alias aws='ssh -i "redhat_key.pem" ubuntu@ec2-52-78-70-33.ap-northeast-2.compute.amazonaws.com'
+alias aws='ssh -i "redhat_key.pem" ec2-user@ec2-52-78-85-239.ap-northeast-2.compute.amazonaws.com'
+alias ohws='ssh -i "homepg.pem" ec2-user@ec2-52-78-186-215.ap-northeast-2.compute.amazonaws.com'
+
+# kens project
+alias k='~/kens'
+alias ktcp='~/kens/app/TestTCP'
+alias kbuild='~/kens/build'
+alias ksrc='~/kens/src'
+
+# cpplint
+alias cpplint='~/styleguide/cpplint/cpplint.py'
 
 # environment variables
 PATH=/opt/local/bin:$PATH
@@ -111,6 +121,13 @@ export DYLD_LIBRARY_PATH
 NLS_LANG=AMERICAN_CIS.UTF8
 export NLS_LANG
 
-export LC_ALL="C"
+# mysql environment vars
+export MYSQL_USER="mysql_user"
+export MYSQL_DATABASE="sample_db"
+export MYSQL_CONTAINER_NAME="mysql"
+export MYSQL_ROOT_PASSWORD="1234"
+export MYSQL_PASSWORD="1234"
+
+export LC_ALL="en_US.UTF-8"
 
 # pip3 install location - /usr/local/lib/python3.5/site-packages
