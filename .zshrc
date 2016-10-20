@@ -99,7 +99,7 @@ alias gi1='gst-inspect-1.0'
 
 # amazon web
 alias aws='ssh -i "redhat_key.pem" ec2-user@ec2-52-78-85-239.ap-northeast-2.compute.amazonaws.com'
-alias ohws='ssh -i "homepg.pem" ec2-user@ec2-52-78-186-215.ap-northeast-2.compute.amazonaws.com'
+alias ohws='sudo ssh -i "homepg.pem" ec2-user@ec2-52-78-186-215.ap-northeast-2.compute.amazonaws.com'
 
 # kens project
 alias k='~/kens'
@@ -110,9 +110,14 @@ alias ksrc='~/kens/src'
 # cpplint
 alias cpplint='~/styleguide/cpplint/cpplint.py'
 
-# environment variables
+# ENVIRONMENT VARIABLES
 PATH=/opt/local/bin:$PATH
 export PATH
+
+export LANG=en_US.utf8
+export LC_LANG=ko_KR.UTF8
+export LC_MESSAGES=ko_KR.UTF8
+
 # for oracle database fucking client
 PATH=$PATH:~/db/instantclient_12_1
 export PATH
@@ -121,12 +126,14 @@ export DYLD_LIBRARY_PATH
 NLS_LANG=AMERICAN_CIS.UTF8
 export NLS_LANG
 
-# mysql environment vars
-export MYSQL_USER="mysql_user"
-export MYSQL_DATABASE="sample_db"
-export MYSQL_CONTAINER_NAME="mysql"
-export MYSQL_ROOT_PASSWORD="1234"
-export MYSQL_PASSWORD="1234"
+# php Path
+export PATH=$PATH:/usr/local/php5/bin
+
+# mysql
+export PATH=$PATH:/usr/local/mysql/bin
+
+# anaconda
+export PATH=$PATH:/Users/deNsuh/anaconda3/bin
 
 export LC_ALL="en_US.UTF-8"
 
