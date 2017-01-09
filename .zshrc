@@ -5,7 +5,8 @@ export ZSH=/Users/deNsuh/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="re5et"
+# ZSH_THEME="re5et"
+ZSH_THEME="xiong-chiamiov-plus"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -18,7 +19,7 @@ ZSH_THEME="re5et"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=15
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -89,52 +90,82 @@ alias ctags="/usr/local/Cellar/ctags/5.8_1/bin/ctags"
 alias la='ls -a'
 alias ll='ls -al'
 
+# BREW
+# brew --prefix
+
 # tmux related aliases
 alias tls='tmux ls'
 alias ta='tmux attach -t'
 
-# gst aliases
-alias gl1='gst-launch-1.0'
-alias gi1='gst-inspect-1.0'
-
 # amazon web
-alias aws='ssh -i "redhat_key.pem" ec2-user@ec2-52-78-85-239.ap-northeast-2.compute.amazonaws.com'
+alias aws='sudo ssh -i "redhat_key.pem" ec2-user@ec2-52-78-182-182.ap-northeast-2.compute.amazonaws.com'
 alias ohws='sudo ssh -i "homepg.pem" ec2-user@ec2-52-78-186-215.ap-northeast-2.compute.amazonaws.com'
 
-# kens project
-alias k='~/kens'
-alias ktcp='~/kens/app/TestTCP'
-alias kbuild='~/kens/build'
-alias ksrc='~/kens/src'
+# nota server
+alias adam='ssh kehops@143.248.136.11'
+alias eve='ssh kehops@143.248.136.12'
 
 # cpplint
 alias cpplint='~/styleguide/cpplint/cpplint.py'
 
-# ENVIRONMENT VARIABLES
-PATH=/opt/local/bin:$PATH
-export PATH
-
+## ENVIRONMENT VARIABLES ##
+export PATH=$(getconf PATH)
+# LANGUAGE SETTINGS
 export LANG=en_US.utf8
+export LC_ALL="en_US.UTF-8"
 export LC_LANG=ko_KR.UTF8
 export LC_MESSAGES=ko_KR.UTF8
+export NLS_LANG=AMERICAN_CIS.UTF8
+
+# PATH
+export PATH=/usr/local/bin:/opt/local/bin:$PATH  # brew
 
 # for oracle database fucking client
-PATH=$PATH:~/db/instantclient_12_1
-export PATH
-DYLD_LIBRARY_PATH=~/db/instantclient_12_1:$DYLD_LIBRARY_PATH
-export DYLD_LIBRARY_PATH
-NLS_LANG=AMERICAN_CIS.UTF8
-export NLS_LANG
+export PATH=$PATH:~/db/instantclient_12_1
+export DYLD_LIBRARY_PATH=~/db/instantclient_12_1
+export TNS_ADMIN=~/db/instantclient_12_1/network/admin
+export ORACLE_SID=orcl
+
+# java
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home
+export PATH=$JAVA_HOME/bin:$PATH
+
+# cuDNN - Cuda for Neural Network .dylib path
+export DYLD_LIBRARY_PATH=~/cuda:$DYLD_LIBRARY_PATH
 
 # php Path
-export PATH=$PATH:/usr/local/php5/bin
+export PATH=/usr/local/php5/bin:$PATH
 
 # mysql
-export PATH=$PATH:/usr/local/mysql/bin
-
-# anaconda
-export PATH=$PATH:/Users/deNsuh/anaconda3/bin
-
-export LC_ALL="en_US.UTF-8"
+export PATH=/usr/local/mysql/bin:$PATH
 
 # pip3 install location - /usr/local/lib/python3.5/site-packages
+export PATH=/usr/local/sbin:$PATH
+
+# yarn
+export PATH=`yarn global bin`:$PATH
+
+# PYTHON
+# which -a python : see all installed python interpreters
+# which -a pypy3 : can see installed pypy
+# pip --version : shows the path to site-packages
+# python --version : python version
+# python -c 'import numpy.core; print(numpy.core.__file__)' : shows the path to numpy installation - seems to be different from pip-installed numpy
+# or you can use: pip show numpy
+# python-config --include : gives the include path of current python
+
+# ANACONDA
+# uncomment each lines to use brew python instead of anaconda python
+export PATH=/Users/deNsuh/anaconda2/bin:$PATH
+export PATH=/Users/deNsuh/anaconda3/bin:$PATH  # primary location
+# site-packages primary location - anaconda3 packages
+export PATH=/Users/deNsuh/anaconda3/lib/python3.5/site-packages:$PATH
+
+# pyvenv
+# enable shims and autocompletion
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+# pyenv-virtualenv
+# enable autoactivation
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+

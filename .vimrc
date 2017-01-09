@@ -1,12 +1,15 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Setting up Vundle
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
 " :PluginList, :PluginInstall, :PluginClean, :PluginSearch
 set nocompatible
 filetype off
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim 
 call vundle#begin()
 " algernatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -18,19 +21,17 @@ call vundle#begin()
 "
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim' 		       " required
+" Installing YCM
+" cd ~/.vim/bundle/YouCompleteMe
+" ./install.py --clang-completer --tern-completer
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'chriskempson/base16-vim'         " base-16 colorthemes
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'  " themes for airline
 Plugin 'edkolev/tmuxline.vim'						 " apply airline-synced theme to tmux
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'							 " snippets for ultisnips
 Plugin 'kien/ctrlp.vim'									 " fuzzy finder
 Plugin 'fugitive.vim'
 Plugin 'The-NERD-tree'
-
-Plugin 'Shougo/vimproc.vim'              " chuck.vim depends on this
-Plugin 'highwaynoise/chuck.vim'          " chuck syntax highlighter and vm controller
 
 " All of your plugins must be added before the following line
 call vundle#end()
@@ -53,6 +54,7 @@ set showcmd				      " show incomplete commands
 set wildmenu            " allow autocompletion with <tab>
 set encoding=utf-8
 set term=xterm-256color	" enables airline within tmux
+set backspace=2         " make backspace work normally
 
 " searching
 set smartcase
@@ -101,14 +103,6 @@ let g:ycm_key_detailed_diagnostics='<leader>d'
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_confirm_extra_conf = 0
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UltiSnips settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<c-x>" 		" 'x' for expand
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airline settings
