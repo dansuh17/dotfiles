@@ -105,8 +105,8 @@ alias ohws='sudo ssh -i "homepg.pem" ec2-user@ec2-52-78-186-215.ap-northeast-2.c
 alias adam='ssh kehops@143.248.136.11'
 alias eve='ssh kehops@143.248.136.12'
 
-# cpplint
-alias cpplint='~/styleguide/cpplint/cpplint.py'
+# mac server
+alias richter='ssh richter@mac-bach.kaist.ac.kr'
 
 ## ENVIRONMENT VARIABLES ##
 export PATH=$(getconf PATH)

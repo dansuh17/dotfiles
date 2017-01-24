@@ -49,6 +49,7 @@ set cindent
 set tabstop=2           " tap = 2 spaces
 set expandtab           " expand tab into spaces
 set shiftwidth=2
+set shiftround  " round indents to multiple of shiftwidth
 set ruler					      " indicate current position of cursor
 set showcmd				      " show incomplete commands
 set wildmenu            " allow autocompletion with <tab>
@@ -59,6 +60,7 @@ set backspace=2         " make backspace work normally
 " searching
 set smartcase
 set hlsearch
+set incsearch  " immediately highlight seraches
 
 " advanced
 set autowrite			      " auto write when going off to other files
@@ -81,6 +83,31 @@ cs add ../cscope.out
 " note that colortheme is selected within iTerm2!
 " no specific colortheme applied in .vimrc
 
+" TIPS
+" inserting digraphs
+" :dig or i_CTRL-k
+"
+" view contents in macro
+" :put <register>
+"
+" see histories
+" command line history
+" :his c 
+" command line history window
+" q:
+" search history
+" :his s
+"
+" set the previous context mark
+" m` or m'
+" mark position at register a
+" :ma a
+" move position to register a
+" `a
+" go to previous context mark
+" '' or ``
+"
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -89,7 +116,9 @@ nmap k gk
 nmap <F2> :bp<CR>
 nmap <F3> :bn<CR>
 nmap <F4> :make!<CR>
-nmap <F7> :NERDTreeToggle<CR>
+nmap <F6> :NERDTreeToggle<CR>
+nmap <F7> :nohl<CR>
+nmap <F8> :!ctags -R .<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe Settings
