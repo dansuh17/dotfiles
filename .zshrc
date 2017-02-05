@@ -169,3 +169,6 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 # enable autoactivation
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
+# mac-urp mp3 file NFS path
+alias mp3='cd /nfs/mac'
+
