@@ -102,8 +102,9 @@ alias aws='sudo ssh -i "redhat_key.pem" ec2-user@ec2-52-78-182-182.ap-northeast-
 alias ohws='sudo ssh -i "homepg.pem" ec2-user@ec2-52-78-186-215.ap-northeast-2.compute.amazonaws.com'
 
 # nota server
-alias adam='ssh kehops@143.248.136.11'
-alias eve='ssh kehops@143.248.136.12'
+alias adam='ssh -X kehops@143.248.136.11'
+alias eve='ssh -X eve@143.248.136.12'
+alias nota='ssh -X thkim@143.248.136.166'  # pw = shxk2521
 
 # mac server
 alias richter='ssh richter@mac-bach.kaist.ac.kr'
@@ -171,4 +172,5 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 
 # mac-urp mp3 file NFS path
 alias mp3='cd /nfs/mac'
+
 
