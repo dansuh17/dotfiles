@@ -25,13 +25,13 @@ Plugin 'VundleVim/Vundle.vim' 		       " required
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer --tern-completer
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'chriskempson/base16-vim'         " base-16 colorthemes
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'  " themes for airline
 Plugin 'edkolev/tmuxline.vim'						 " apply airline-synced theme to tmux
 Plugin 'kien/ctrlp.vim'									 " fuzzy finder
 Plugin 'fugitive.vim'
 Plugin 'The-NERD-tree'
+Plugin 'surround.vim'  " surround functions
 
 " All of your plugins must be added before the following line
 call vundle#end()
@@ -80,8 +80,9 @@ set tags=./tags,tags,../tags,../../tags
 set path=.,..,/usr/local/include,/Library/Frameworks
 cs add ../cscope.out
 
-" note that colortheme is selected within iTerm2!
-" no specific colortheme applied in .vimrc
+" must have solarized.vim file in '~/.vim/colors' directory
+" this file can be downloaded separately
+colorscheme solarized
 
 " TIPS
 " inserting digraphs
@@ -150,19 +151,14 @@ set laststatus=2
 " also, powerline/fonts is installed for status bar's
 " non-ascii character support
 let g:airline#extensions#tmuxline#enabled = 1
-" theme: goes well with base16_ocean
-let g:airline_theme='base16_monokai'
+" theme
+let g:airline_theme='luna'
 " compatible with fugitive
 let g:airline#extension#branch#enabled = 1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" base 16 settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" without this, the colors will be really no-jem
-let base16colorspace = 256
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tmuxline settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " enable all display options
 let g:tmuxline_preset = 'full'
+

@@ -103,8 +103,11 @@ alias ohws='sudo ssh -i "homepg.pem" ec2-user@ec2-52-78-186-215.ap-northeast-2.c
 
 # nota server
 alias adam='ssh -X kehops@143.248.136.11'
-alias eve='ssh -X eve@143.248.136.12'
+alias eve='ssh -X kehops@143.248.136.12'
 alias nota='ssh -X thkim@143.248.136.166'  # pw = shxk2521
+alias nota-hp='ssh root@211.249.49.57' # pw = shxk@5@1
+alias chiyak='ssh -i "chiyak_seoul.pem" ubuntu@ec2-13-124-43-53.ap-northeast-2.compute.amazonaws.com'
+alias nota-naver='ssh dansuh@1.255.55.73' # qwe123
 
 # mac server
 alias richter='ssh richter@mac-bach.kaist.ac.kr'
