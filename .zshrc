@@ -105,9 +105,10 @@ alias ohws='sudo ssh -i "homepg.pem" ec2-user@ec2-52-78-186-215.ap-northeast-2.c
 alias adam='ssh -X kehops@143.248.136.11'
 alias eve='ssh -X kehops@143.248.136.12'
 alias nota='ssh -X thkim@143.248.136.166'  # pw = shxk2521
-alias nota-hp='ssh root@211.249.49.57' # pw = shxk@5@1
 alias chiyak='ssh -i "chiyak_seoul.pem" ubuntu@ec2-13-124-43-53.ap-northeast-2.compute.amazonaws.com'
-alias nota-naver='ssh dansuh@1.255.55.73' # qwe123
+alias nota-1='ssh dansuh@1.255.55.73' # qwe123
+alias nota-hp='ssh root@211.249.49.57' # pw = shxk@5@1
+alias nota-2='ssh root@1.255.55.72:2224' # shxk@5@1
 
 # mac server
 alias richter='ssh richter@mac-bach.kaist.ac.kr'
@@ -158,22 +159,6 @@ export PATH=`yarn global bin`:$PATH
 # or you can use: pip show numpy
 # python-config --include : gives the include path of current python
 
-# ANACONDA
-# uncomment each lines to use brew python instead of anaconda python
-export PATH=/Users/deNsuh/anaconda2/bin:$PATH
-export PATH=/Users/deNsuh/anaconda3/bin:$PATH  # primary location
-# site-packages primary location - anaconda3 packages
-export PATH=/Users/deNsuh/anaconda3/lib/python3.5/site-packages:$PATH
-
-# pyvenv
-# enable shims and autocompletion
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-
-# pyenv-virtualenv
-# enable autoactivation
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
 # mac-urp mp3 file NFS path
 alias mp3='cd /nfs/mac'
-
 

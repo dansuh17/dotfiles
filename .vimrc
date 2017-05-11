@@ -9,7 +9,7 @@ set nocompatible
 filetype off
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim 
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " algernatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -35,7 +35,8 @@ Plugin 'surround.vim'  " surround functions
 
 " All of your plugins must be added before the following line
 call vundle#end()
-filetype plugin indent on
+filetype plugin on
+filetype indent on
 syntax enable
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -50,29 +51,68 @@ set tabstop=2           " tap = 2 spaces
 set expandtab           " expand tab into spaces
 set shiftwidth=2
 set shiftround  " round indents to multiple of shiftwidth
-set ruler					      " indicate current position of cursor
+set ruler  " indicate current position of cursor
 set showcmd				      " show incomplete commands
 set wildmenu            " allow autocompletion with <tab>
 set encoding=utf-8
 set term=xterm-256color	" enables airline within tmux
 set backspace=2         " make backspace work normally
+set showmatch  " show matching brackets when text indicator is over them
+set mat=2  " 0.2sec to blink on matching brackets
+set laststatus=2  " show status line at all times
+set scrolloff=5
+
+" no annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=  " visual bell
+" set foldcolumn=1  " left extra margin
 
 " searching
 set smartcase
-set hlsearch
+set hlsearch  " highlight search (:noh<cr> to disable)
 set incsearch  " immediately highlight seraches
+" map <space> to search, Ctrl-<space> to backwards search
+map <space> /
+map <c-space> ?
 
 " advanced
-set autowrite			      " auto write when going off to other files
-set autoread			      " auto read in when modified outside
+set autowrite  " auto write when going off to other files
+set autoread  " auto read in when modified outside
+
+" misc
+set history=700  " remember up to n histories
+set timeoutlen=500  " timeout length on mappings and key codes
+
+" Return to last edit position when opening files (You want this!)
+" WOWW
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " locality and security
 set exrc					      " if found, use local .vimrc
 set secure				      " restrict some commands in non-default .vimrc
 
-set nopaste				      " default is nopaste
-set pastetoggle=<F10>		" map paste toggle key
+set nopaste  " default is nopaste
+set pastetoggle=<F10>  " map paste toggle key
 " this is set because 'paste' disables all mappings
+
+" disable sound on errors on MacVim
+if has("gui_macvim")
+    autocmd GUIEnter * set vb t_vb=
+endif
+
+" Delete trailing white space on save!!!
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+if has("autocmd")
+    autocmd BufWritePre *.c,*.cc,*.js,*.py,*.sh :call CleanExtraSpaces()
+endif
 
 " dependencies and paths
 set tags=./tags,tags,../tags,../../tags
@@ -85,7 +125,14 @@ cs add ../cscope.out
 colorscheme solarized
 
 " TIPS
-" inserting digraphs
+" <using help>
+" for vim-script keywords:
+" :h 'expandtab'
+"
+" <show end of line>
+" :set list (:set nolist to disable)
+"
+" <inserting digraphs>
 " :dig or i_CTRL-k
 "
 " view contents in macro
@@ -93,7 +140,7 @@ colorscheme solarized
 "
 " see histories
 " command line history
-" :his c 
+" :his c
 " command line history window
 " q:
 " search history
@@ -145,8 +192,6 @@ let g:airline#extensions#ycm#enabled = 1
 let g:airline#extensions#ycm#error_symbol = 'E:'
 " set warning count prefix >
 let g:airline#extensions#ycm#warning_symbol = 'W:'
-" make airline appear all the time
-set laststatus=2
 " enable tmuxline integration
 " also, powerline/fonts is installed for status bar's
 " non-ascii character support
