@@ -97,22 +97,6 @@ alias ll='ls -al'
 alias tls='tmux ls'
 alias ta='tmux attach -t'
 
-# amazon web
-alias aws='sudo ssh -i "redhat_key.pem" ec2-user@ec2-52-78-182-182.ap-northeast-2.compute.amazonaws.com'
-alias ohws='sudo ssh -i "homepg.pem" ec2-user@ec2-52-78-186-215.ap-northeast-2.compute.amazonaws.com'
-
-# nota server
-alias adam='ssh -X kehops@143.248.136.11'
-alias eve='ssh -X kehops@143.248.136.12'
-alias nota='ssh -X thkim@143.248.136.166'  # pw = shxk2521
-alias chiyak='ssh -i "chiyak_seoul.pem" ubuntu@ec2-13-124-43-53.ap-northeast-2.compute.amazonaws.com'
-alias nota-1='ssh dansuh@1.255.55.73' # qwe123
-alias nota-hp='ssh root@211.249.49.57' # pw = shxk@5@1
-alias nota-2='ssh root@1.255.55.72:2224' # shxk@5@1
-
-# mac server
-alias richter='ssh richter@mac-bach.kaist.ac.kr'
-
 ## ENVIRONMENT VARIABLES ##
 export PATH=$(getconf PATH)
 # LANGUAGE SETTINGS
@@ -159,6 +143,6 @@ export PATH=`yarn global bin`:$PATH
 # or you can use: pip show numpy
 # python-config --include : gives the include path of current python
 
-# mac-urp mp3 file NFS path
-alias mp3='cd /nfs/mac'
+# import local-specific aliases
+source $HOME/.bash_aliases
 

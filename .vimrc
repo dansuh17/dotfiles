@@ -32,6 +32,8 @@ Plugin 'kien/ctrlp.vim'									 " fuzzy finder
 Plugin 'fugitive.vim'
 Plugin 'The-NERD-tree'
 Plugin 'surround.vim'  " surround functions
+Plugin 'ntpeters/vim-better-whitespace'  " whitespace hleper
+Plugin 'mileszs/ack.vim'  " use silver searcher
 
 " All of your plugins must be added before the following line
 call vundle#end()
@@ -89,8 +91,8 @@ set timeoutlen=500  " timeout length on mappings and key codes
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " locality and security
-set exrc					      " if found, use local .vimrc
-set secure				      " restrict some commands in non-default .vimrc
+set exrc  " if found, use local .vimrc
+set secure  " restrict some commands in non-default .vimrc
 
 set nopaste  " default is nopaste
 set pastetoggle=<F10>  " map paste toggle key
@@ -118,7 +120,10 @@ endif
 set tags=./tags,tags,../tags,../../tags
 " set path variable for searching include files
 set path=.,..,/usr/local/include,/Library/Frameworks
-cs add ../cscope.out
+" search sub-directories recursively from current working directory when finding files
+set path+=**
+" ignore when searching files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/\.git/*  " OSX/Linux
 
 " must have solarized.vim file in '~/.vim/colors' directory
 " this file can be downloaded separately
@@ -155,6 +160,13 @@ colorscheme solarized
 " go to previous context mark
 " '' or ``
 "
+" finding file (vim default)
+" :find .vimrc
+"
+" view the full path of file
+" :echo expand("%:p")
+" only the name
+" :echo expand("%")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings
@@ -167,6 +179,18 @@ nmap <F4> :make!<CR>
 nmap <F6> :NERDTreeToggle<CR>
 nmap <F7> :nohl<CR>
 nmap <F8> :!ctags -R .<CR>
+" or use a command
+command! MakeTags !ctags -R .
+" use ^] to jump immediately, use g^] for ambiguous tags
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" snippets!!
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" invoke read command, (with no extra line '-1') and move the cursor
+" to wanted position
+nnoremap ,html :-1read $HOME/.vim/skel/html<CR>3jwf>a
+" python main
+nnoremap ,pyma :-1read $HOME/.vim/skel/pymain<CR>jA
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe Settings
@@ -201,9 +225,39 @@ let g:airline_theme='luna'
 " compatible with fugitive
 let g:airline#extension#branch#enabled = 1
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tmuxline settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " enable all display options
 let g:tmuxline_preset = 'full'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" better whitespace option
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight ExtraWhitespace ctermbg=0xFF0000
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ctrlp options
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" cache for performance
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" use ag when available - THIS IS SICK!
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ack.vim options
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" use ag instead
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+" uncomment below if you don't want to jump to first result instantly
+" cnoreabbrev Ack Ack!
+" nnoremap <leader>a :Ack!<Space>
 
