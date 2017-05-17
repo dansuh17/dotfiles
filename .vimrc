@@ -193,6 +193,8 @@ let g:mapleader = ","
 nnoremap ,html :-1read $HOME/.vim/skel/html<CR>3jwf>a
 " python main
 nnoremap ,pyma :-1read $HOME/.vim/skel/pymain<CR>jA
+" python docstring
+nnoremap ,pydoc :-1read $HOME/.vim/skel/pydoc<CR>j
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe Settings

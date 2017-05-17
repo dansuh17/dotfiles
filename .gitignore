@@ -10,4 +10,12 @@
 !.tmux.conf
 !.gitconfig
 
+# first whitelist the folder
+!.vim/
+!.vim/skel/
+!.vim/skel/*
 
+# this is how you un-ignore subdirectories
+# !~/.vim/  # un-ignore first
+# ~/.vim/*  # ignore everything underneath...
+# !~/.vim/skel/  # ...except this
