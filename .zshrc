@@ -79,19 +79,19 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias f='open -a Finder ./' # open current directory in finder
-alias ctags="/usr/local/Cellar/ctags/5.8_1/bin/ctags"
+
+# backup dotfiles:
+# mkdir -p ~/.dotfiles.backup
+# mv ~/.[^.]* ~/.dotfiles.backup/
+
 
 # ls aliases
 alias la='ls -a'
 alias ll='ls -al'
-
-# BREW
-# brew --prefix
 
 # tmux related aliases
 alias tls='tmux ls'
@@ -99,6 +99,8 @@ alias ta='tmux attach -t'
 
 ## ENVIRONMENT VARIABLES ##
 export PATH=$(getconf PATH)
+export PATH=/usr/local/sbin:$PATH
+
 # LANGUAGE SETTINGS
 export LANG=en_US.utf8
 export LC_ALL="en_US.UTF-8"
@@ -108,6 +110,12 @@ export NLS_LANG=AMERICAN_CIS.UTF8
 
 # PATH
 export PATH=/usr/local/bin:/opt/local/bin:$PATH  # brew
+
+# PYTHON
+# which -a python : see all installed python interpreters
+# pip --version : shows the path to site-packages
+# per package : pip show numpy
+# python-config --include : gives the include path of current python
 
 # for oracle database fucking client
 export PATH=$PATH:~/db/instantclient_12_1
@@ -128,21 +136,18 @@ export PATH=/usr/local/php5/bin:$PATH
 # mysql
 export PATH=/usr/local/mysql/bin:$PATH
 
-# pip3 install location - /usr/local/lib/python3.5/site-packages
-export PATH=/usr/local/sbin:$PATH
-
 # yarn
 export PATH=`yarn global bin`:$PATH
-
-# PYTHON
-# which -a python : see all installed python interpreters
-# which -a pypy3 : can see installed pypy
-# pip --version : shows the path to site-packages
-# python --version : python version
-# python -c 'import numpy.core; print(numpy.core.__file__)' : shows the path to numpy installation - seems to be different from pip-installed numpy
-# or you can use: pip show numpy
-# python-config --include : gives the include path of current python
 
 # import local-specific aliases
 source $HOME/.bash_aliases
 
+# fasd
+eval "$(fasd --init auto)"
+
+fasd_cache="$HOME/.fasd-init-zsh"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache

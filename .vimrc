@@ -123,7 +123,7 @@ set path=.,..,/usr/local/include,/Library/Frameworks
 " search sub-directories recursively from current working directory when finding files
 set path+=**
 " ignore when searching files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/\.git/*  " OSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/\.git/*,*DS_Store*  " OSX/Linux
 
 " must have solarized.vim file in '~/.vim/colors' directory
 " this file can be downloaded separately
@@ -182,6 +182,8 @@ nmap <F8> :!ctags -R .<CR>
 " or use a command
 command! MakeTags !ctags -R .
 " use ^] to jump immediately, use g^] for ambiguous tags
+let mapleader = ","
+let g:mapleader = ","
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " snippets!!
