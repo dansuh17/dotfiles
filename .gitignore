@@ -9,6 +9,7 @@
 !.ycm_extra_conf.py
 !.tmux.conf
 !.gitconfig
+!README.md
 
 # first whitelist the folder
 !.vim/

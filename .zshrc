@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/deNsuh/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -137,12 +137,12 @@ export PATH=/usr/local/php5/bin:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
 
 # yarn
-export PATH=`yarn global bin`:$PATH
+# export PATH=`yarn global bin`:$PATH
 
 # import local-specific aliases
 source $HOME/.bash_aliases
 
-# fasd
+# fasd -- might need install before use
 eval "$(fasd --init auto)"
 
 fasd_cache="$HOME/.fasd-init-zsh"
