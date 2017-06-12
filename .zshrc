@@ -90,12 +90,16 @@ source $ZSH/oh-my-zsh.sh
 
 
 # ls aliases
+alias l='ls -alh'
 alias la='ls -a'
 alias ll='ls -al'
 
 # tmux related aliases
 alias tls='tmux ls'
 alias ta='tmux attach -t'
+
+# fasd
+alias v='f -e vim'  # quick open files with vim
 
 ## ENVIRONMENT VARIABLES ##
 export PATH=$(getconf PATH)
@@ -151,3 +155,11 @@ if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
 fi
 source "$fasd_cache"
 unset fasd_cache
+
+# automatically activate pyhton venv SO COOL
+function cd {
+  builtin cd "$@"
+  if [ -d "venv" ] ; then
+    source venv/bin/activate
+  fi
+}

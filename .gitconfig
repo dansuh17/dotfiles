@@ -4,6 +4,7 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
+  commentChar = ";"
 [push]
 	default = simple
 [color]

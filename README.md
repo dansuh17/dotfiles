@@ -6,7 +6,7 @@
 - vim
 - tmux
 - cmake (YCM)
-- python (YCM)
+- python-dev (YCM)
 - oh-my-zsh
 
 ## Installations
