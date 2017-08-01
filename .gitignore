@@ -10,6 +10,7 @@
 !.tmux.conf
 !.gitconfig
 !README.md
+!intellij_settings.jar
 
 # first whitelist the folder
 !.vim/

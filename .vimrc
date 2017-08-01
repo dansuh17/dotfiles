@@ -85,6 +85,9 @@ set autoread  " auto read in when modified outside
 " misc
 set history=700  " remember up to n histories
 set timeoutlen=500  " timeout length on mappings and key codes
+" marks remembered for last 100 files, 3000 line limit to yank,
+" registers with more than 100kB text are skipped
+set viminfo='100,<3000,s100
 
 " Return to last edit position when opening files (You want this!)
 " WOWW
@@ -123,7 +126,7 @@ set path=.,..,/usr/local/include,/Library/Frameworks
 " search sub-directories recursively from current working directory when finding files
 set path+=**
 " ignore when searching files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/\.git/*,*DS_Store*  " OSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/\.git/*,*DS_Store*,*/node_modules/*  " OSX/Linux
 
 " must have solarized.vim file in '~/.vim/colors' directory
 " this file can be downloaded separately
@@ -248,7 +251,7 @@ highlight ExtraWhitespace ctermbg=0xFF0000
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cache for performance
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-" use ag when available - THIS IS SICK!
+" use system ag when available - THIS IS SICK!
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
@@ -257,7 +260,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ack.vim options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" use ag instead
+" use ag instead of ack if available
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
