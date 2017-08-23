@@ -34,6 +34,7 @@ Plugin 'The-NERD-tree'
 Plugin 'surround.vim'  " surround functions
 Plugin 'ntpeters/vim-better-whitespace'  " whitespace hleper
 Plugin 'mileszs/ack.vim'  " use silver searcher
+Plugin 'altercation/vim-colors-solarized'  " solarized colorscheme for vim
 
 " All of your plugins must be added before the following line
 call vundle#end()
@@ -129,7 +130,9 @@ set path+=**
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/\.git/*,*DS_Store*,*/node_modules/*  " OSX/Linux
 
 " must have solarized.vim file in '~/.vim/colors' directory
-" this file can be downloaded separately
+" can be done by installing 'altercation/vim-colors-solarized' package
+let g:solarized_termcolors=256  " needed for terminal vims (non-GUI vims)
+set background=dark
 colorscheme solarized
 
 " TIPS

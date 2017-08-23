@@ -1,6 +1,6 @@
 [user]
 	name = Dan Suh
-	email = kehops@kaist.ac.kr
+	email = kaehops@gmail.com
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global

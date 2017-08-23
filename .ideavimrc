@@ -1,0 +1,8 @@
+set number
+set relativenumber
+set ruler
+set showcmd
+set noerrorbells
+set hlsearch
+set incsearch
+

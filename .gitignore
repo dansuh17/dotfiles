@@ -11,6 +11,7 @@
 !.gitconfig
 !README.md
 !intellij_settings.jar
+!.ideavimrc
 
 # first whitelist the folder
 !.vim/

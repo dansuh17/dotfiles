@@ -52,11 +52,6 @@ export UPDATE_ZSH_DAYS=15
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git colorize colored-man-pages)
 
-# User configuration
-
-# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -80,14 +75,9 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # backup dotfiles:
 # mkdir -p ~/.dotfiles.backup
 # mv ~/.[^.]* ~/.dotfiles.backup/
-
 
 # ls aliases
 alias l='ls -alh'
@@ -97,6 +87,10 @@ alias ll='ls -al'
 # tmux related aliases
 alias tls='tmux ls'
 alias ta='tmux attach -t'
+
+# vim - mvim or vim v.8.0 or above is required for various plugins and colorschemes
+alias vi='mvim -v'
+alias vim='mvim -v'
 
 # fasd
 alias v='f -e vim'  # quick open files with vim
@@ -112,36 +106,26 @@ export LC_LANG=ko_KR.UTF8
 export LC_MESSAGES=ko_KR.UTF8
 export NLS_LANG=AMERICAN_CIS.UTF8
 
-# PATH
+# PATH default
 export PATH=/usr/local/bin:/opt/local/bin:$PATH  # brew
 
 # PYTHON
-# which -a python : see all installed python interpreters
 # pip --version : shows the path to site-packages
 # per package : pip show numpy
 # python-config --include : gives the include path of current python
 
-# for oracle database fucking client
-export PATH=$PATH:~/db/instantclient_12_1
-export DYLD_LIBRARY_PATH=~/db/instantclient_12_1
-export TNS_ADMIN=~/db/instantclient_12_1/network/admin
-export ORACLE_SID=orcl
-
 # java
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home
+export JAVA_HOME="$(/usr/libexec/java_home)"
 export PATH=$JAVA_HOME/bin:$PATH
 
+# mactex binaries
+export PATH=/usr/local/texlive/2017/bin/x86_64-darwin:$PATH
+
 # cuDNN - Cuda for Neural Network .dylib path
-export DYLD_LIBRARY_PATH=~/cuda:$DYLD_LIBRARY_PATH
-
-# php Path
-export PATH=/usr/local/php5/bin:$PATH
-
-# mysql
-export PATH=/usr/local/mysql/bin:$PATH
+# export DYLD_LIBRARY_PATH=~/cuda:$DYLD_LIBRARY_PATH
 
 # osxlatex
-export PATH=/Library/TeX/texbin/:$PATH
+# export PATH=/Library/TeX/texbin/:$PATH
 
 # import local-specific aliases
 source $HOME/.bash_aliases
@@ -164,8 +148,3 @@ function cd {
   fi
 }
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/deNsuh/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/deNsuh/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/deNsuh/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/deNsuh/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
