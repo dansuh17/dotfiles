@@ -21,7 +21,7 @@ call vundle#begin()
 "
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim' 		       " required
-" Installing YCM
+" Installing YCM - install again if 'ycm server shut down' error occurs
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer --tern-completer
 Plugin 'Valloric/YouCompleteMe'
@@ -35,6 +35,8 @@ Plugin 'surround.vim'  " surround functions
 Plugin 'ntpeters/vim-better-whitespace'  " whitespace hleper
 Plugin 'mileszs/ack.vim'  " use silver searcher
 Plugin 'altercation/vim-colors-solarized'  " solarized colorscheme for vim
+Plugin 'vim-syntastic/syntastic'  " syntactic checker
+Plugin 'SirVer/ultisnips'  " snippet engine
 
 " All of your plugins must be added before the following line
 call vundle#end()
@@ -202,11 +204,25 @@ nnoremap ,pyma :-1read $HOME/.vim/skel/pymain<CR>jA
 " python docstring
 nnoremap ,pydoc :-1read $HOME/.vim/skel/pydoc<CR>j
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Nerdtree Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeIgnore=['\.pyc$', '\~$']  " ignore these files in NERDTree
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YCM has to be compiled before using!
 " use --clang-compeleter option
+"
+" maps GoTo command. It goes to most reasonable of eithr : declaration or
+" definition.
+" It populates vim's jumplist so that we can go back and forward using
+" <C-O> and <C-I>, respectively.
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
+nnoremap <leader>jr :YcmCompleter GoToReference<CR>
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_key_list_select_completion=['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion=['<S-TAB>', '<Up>']
@@ -214,6 +230,7 @@ let g:ycm_key_detailed_diagnostics='<leader>d'
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_python_binary_path = 'python3'  " semanic completion based on executable interpreter
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airline settings
@@ -270,4 +287,16 @@ endif
 " uncomment below if you don't want to jump to first result instantly
 " cnoreabbrev Ack Ack!
 " nnoremap <leader>a :Ack!<Space>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" syntastic settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 

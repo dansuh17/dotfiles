@@ -118,8 +118,16 @@ export PATH=/usr/local/bin:/opt/local/bin:$PATH  # brew
 export JAVA_HOME="$(/usr/libexec/java_home)"
 export PATH=$JAVA_HOME/bin:$PATH
 
+# go
+export PATH=/usr/local/go/bin:$PATH
+export PATH=$(go env GOPATH)/bin:$PATH
+export GOPATH=$(go env GOPATH)
+
 # mactex binaries
 export PATH=/usr/local/texlive/2017/bin/x86_64-darwin:$PATH
+
+# home folder's bin folder
+export PATH=~/bin:$PATH
 
 # cuDNN - Cuda for Neural Network .dylib path
 # export DYLD_LIBRARY_PATH=~/cuda:$DYLD_LIBRARY_PATH
