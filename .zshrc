@@ -92,6 +92,12 @@ alias ta='tmux attach -t'
 alias vi='mvim -v'
 alias vim='mvim -v'
 
+# git aliases provided oh-my-zsh
+# ga = git add
+# gc = git commit -v
+# gst = git status
+# gc! = git commit --amend
+
 # fasd
 alias v='f -e vim'  # quick open files with vim
 
@@ -155,4 +161,3 @@ function cd {
     source venv/bin/activate
   fi
 }
-
