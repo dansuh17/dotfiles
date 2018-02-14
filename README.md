@@ -18,3 +18,16 @@ rmdir dotfiles
 git submodule init
 git submodule update
 ```
+# postinstall
+
+chaning shell to zsh
+```bash
+chsh -s `which zsh`
+```
+
+install vundle (vim plugin manager)
+```bash
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+
+to install the plugins listed, run `:PluginInstall` in vi

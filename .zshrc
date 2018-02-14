@@ -88,9 +88,9 @@ alias ll='ls -al'
 alias tls='tmux ls'
 alias ta='tmux attach -t'
 
-# vim - mvim or vim v.8.0 or above is required for various plugins and colorschemes
-alias vi='mvim -v'
-alias vim='mvim -v'
+### VIM - MVIM OR VIM V.8.0 OR ABOVE IS REQUIRED FOR VARIOUS PLUGINS AND COLORSCHEMES
+# alias vi='mvim -v'
+# alias vim='mvim -v'
 
 # git aliases provided oh-my-zsh
 # ga = git add
@@ -99,7 +99,7 @@ alias vim='mvim -v'
 # gc! = git commit --amend
 
 # fasd
-alias v='f -e vim'  # quick open files with vim
+# alias v='f -e vim'  # quick open files with vim
 
 ## ENVIRONMENT VARIABLES ##
 export PATH=$(getconf PATH)
