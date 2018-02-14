@@ -19,7 +19,7 @@ ZSH_THEME="mh"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=15
+export UPDATE_ZSH_DAYS=20
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -103,7 +103,7 @@ alias v='f -e vim'  # quick open files with vim
 
 ## ENVIRONMENT VARIABLES ##
 export PATH=$(getconf PATH)
-export PATH=/usr/local/sbin:$PATH
+# export PATH=/usr/local/sbin:$PATH
 
 # LANGUAGE SETTINGS
 export LANG=en_US.utf8
@@ -112,49 +112,42 @@ export LC_LANG=ko_KR.UTF8
 export LC_MESSAGES=ko_KR.UTF8
 export NLS_LANG=AMERICAN_CIS.UTF8
 
-# PATH default
-export PATH=/usr/local/bin:/opt/local/bin:$PATH  # brew
+### PATH DEFAULT
+# export PATH=/usr/local/bin:/opt/local/bin:$PATH  # brew
 
 # PYTHON
 # pip --version : shows the path to site-packages
 # per package : pip show numpy
 # python-config --include : gives the include path of current python
 
-# java
-export JAVA_HOME="$(/usr/libexec/java_home)"
-export PATH=$JAVA_HOME/bin:$PATH
+# JAVA
+# export JAVA_HOME="$(/usr/libexec/java_home)"
+# export PATH=$JAVA_HOME/bin:$PATH
 
-# go
-export PATH=/usr/local/go/bin:$PATH
-export PATH=$(go env GOPATH)/bin:$PATH
-export GOPATH=$(go env GOPATH)
+# GO
+# export PATH=/usr/local/go/bin:$PATH
+# export PATH=$(go env GOPATH)/bin:$PATH
+# export GOPATH=$(go env GOPATH)
 
-# mactex binaries
-export PATH=/usr/local/texlive/2017/bin/x86_64-darwin:$PATH
+# HOME FOLDER'S BIN FOLDER
+# export PATH=~/bin:$PATH
 
-# home folder's bin folder
-export PATH=~/bin:$PATH
-
-# cuDNN - Cuda for Neural Network .dylib path
+# CUDNN - CUDA FOR NEURAL NETWORK .DYLIB PATH
 # export DYLD_LIBRARY_PATH=~/cuda:$DYLD_LIBRARY_PATH
 
-# osxlatex
-# export PATH=/Library/TeX/texbin/:$PATH
+# IMPORT LOCAL-SPECIFIC ALIASES
+# source $HOME/.bash_aliases
 
-# import local-specific aliases
-source $HOME/.bash_aliases
+### FASD -- MIGHT NEED INSTALL BEFORE USE
+# eval "$(fasd --init auto)"
+# fasd_cache="$HOME/.fasd-init-zsh"
+# if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+#   fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
+# fi
+# source "$fasd_cache"
+# unset fasd_cache
 
-# fasd -- might need install before use
-eval "$(fasd --init auto)"
-
-fasd_cache="$HOME/.fasd-init-zsh"
-if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
-fi
-source "$fasd_cache"
-unset fasd_cache
-
-# automatically activate pyhton venv SO COOL
+### AUTOMATICALLY ACTIVATE PYHTON VENV SO COOL
 function cd {
   builtin cd "$@"
   if [ -d "venv" ] ; then
