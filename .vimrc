@@ -119,7 +119,7 @@ fun! CleanExtraSpaces()
 endfun
 
 if has("autocmd")
-    autocmd BufWritePre *.c,*.cc,*.js,*.py,*.sh :call CleanExtraSpaces()
+    autocmd BufWritePre *.c,*.cc,*.js,*.py,*.sh,*.json,*.cpp,*.go,*.h,*.hpp,*hs :call CleanExtraSpaces()
 endif
 
 " dependencies and paths
