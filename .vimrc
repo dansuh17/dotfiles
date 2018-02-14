@@ -231,6 +231,7 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_python_binary_path = 'python3'  " semanic completion based on executable interpreter
+let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airline settings
