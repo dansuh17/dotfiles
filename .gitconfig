@@ -1,12 +1,12 @@
 [user]
-	name = Dan Suh
-	email = kaehops@gmail.com
+  name = Dan Suh
+  email = kaehops@gmail.com
 [core]
-	editor = vim
-	excludesfile = ~/.gitignore_global
+  editor = vim
+  excludesfile = ~/.gitignore_global
   commentChar = ";"
 [push]
-	default = simple
+  default = simple
 [color]
   diff = auto
   status = auto
@@ -15,8 +15,8 @@
   ui = true
   pager = true
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
 
