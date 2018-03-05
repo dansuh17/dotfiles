@@ -1,4 +1,14 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Profiling
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Run the following commands in order to check what's making your vim slow.
+" :profile start profile.log
+" :profile func *
+" :profile file *
+"" At this point do slow actions
+" :profile pause
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Setting up Vundle
