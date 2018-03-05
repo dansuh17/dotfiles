@@ -48,24 +48,27 @@ syntax enable
 " Basic Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " formattings and editor functionalities
-set number				      " line number
-set relativenumber
+set number  " line number
+" `relativenumber` disabled due to slow scrolling (multiple regex function execution happening)
+" set relativenumber  
 set autoindent
 set cindent
-set tabstop=2           " tap = 2 spaces
-set expandtab           " expand tab into spaces
+set tabstop=2  " tab = 2 spaces
+set expandtab  " expand tab into spaces
 set shiftwidth=2
 set shiftround  " round indents to multiple of shiftwidth
 set ruler  " indicate current position of cursor
-set showcmd				      " show incomplete commands
-set wildmenu            " allow autocompletion with <tab>
+set showcmd	 " show incomplete commands
+set wildmenu  " allow autocompletion with <tab>
 set encoding=utf-8
 set term=xterm-256color	" enables airline within tmux
-set backspace=2         " make backspace work normally
+set backspace=2  " make backspace work normally
 set showmatch  " show matching brackets when text indicator is over them
 set mat=2  " 0.2sec to blink on matching brackets
 set laststatus=2  " show status line at all times
 set scrolloff=5
+set ttyfast  " used for fast redrawing (*removed feature in NeoVim)
+set lazyredraw  " buffers screen updates for fast scrolling
 
 " no annoying sound on errors
 set noerrorbells
@@ -179,8 +182,8 @@ colorscheme solarized
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap j gj
-nmap k gk
+nmap j gj  " goes down one 'visual' line
+nmap k gk  " goes up one 'visual' line
 nmap <F2> :bp<CR>
 nmap <F3> :bn<CR>
 nmap <F4> :make!<CR>
