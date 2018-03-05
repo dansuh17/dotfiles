@@ -20,15 +20,15 @@ call vundle#begin()
 " to properly install macvim on OSX.
 "
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim' 		       " required
+Plugin 'VundleVim/Vundle.vim'  " required
 " Installing YCM - install again if 'ycm server shut down' error occurs
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer --tern-completer
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'  " themes for airline
-Plugin 'edkolev/tmuxline.vim'						 " apply airline-synced theme to tmux
-Plugin 'kien/ctrlp.vim'									 " fuzzy finder
+Plugin 'edkolev/tmuxline.vim'  " apply airline-synced theme to tmux
+Plugin 'kien/ctrlp.vim'  " fuzzy finder
 Plugin 'fugitive.vim'
 Plugin 'The-NERD-tree'
 Plugin 'surround.vim'  " surround functions
