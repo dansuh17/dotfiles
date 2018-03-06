@@ -77,12 +77,7 @@ set showmatch  " show matching brackets when text indicator is over them
 set mat=2  " 0.2sec to blink on matching brackets
 set laststatus=2  " show status line at all times
 set scrolloff=5
-set ttyfast  " used for fast redrawing (*removed feature in NeoVim)
-set lazyredraw  " buffers screen updates for fast scrolling
-" the below two options will show certain characters (tabs, trailing
-" spaces, extends, nbsp) with provided characters
-set list
-set listchars=tab:>-
+set title  " change terminal's title
 
 " no annoying sound on errors
 set noerrorbells
@@ -103,6 +98,14 @@ set autowrite  " auto write when going off to other files
 set autoread  " auto read in when modified outside
 set nobackup
 set noswapfile  " no .swp files!
+" hides buffers instead of closing - doesn't force you to apply the changes
+set hidden
+set lazyredraw  " buffers screen updates for fast scrolling
+" the below two options will show certain characters (tabs, trailing
+" spaces, extends, nbsp) with provided characters
+set list
+set listchars=tab:>-
+set ttyfast  " used for fast redrawing (*removed feature in NeoVim)
 
 " misc
 set history=700  " remember up to n histories
