@@ -71,7 +71,7 @@ set ruler  " indicate current position of cursor
 set showcmd	 " show incomplete commands
 set wildmenu  " allow autocompletion with <tab>
 set encoding=utf-8
-set term=xterm-256color	" enables airline within tmux
+set term=xterm-256color  " enables airline within tmux
 set backspace=2  " make backspace work normally
 set showmatch  " show matching brackets when text indicator is over them
 set mat=2  " 0.2sec to blink on matching brackets
@@ -79,6 +79,10 @@ set laststatus=2  " show status line at all times
 set scrolloff=5
 set ttyfast  " used for fast redrawing (*removed feature in NeoVim)
 set lazyredraw  " buffers screen updates for fast scrolling
+" the below two options will show certain characters (tabs, trailing
+" spaces, extends, nbsp) with provided characters
+set list
+set listchars=tab:>-
 
 " no annoying sound on errors
 set noerrorbells
@@ -97,6 +101,8 @@ map <c-space> ?
 " advanced
 set autowrite  " auto write when going off to other files
 set autoread  " auto read in when modified outside
+set nobackup
+set noswapfile  " no .swp files!
 
 " misc
 set history=700  " remember up to n histories
@@ -192,8 +198,10 @@ colorscheme solarized
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap j gj  " goes down one 'visual' line
-nmap k gk  " goes up one 'visual' line
+" goes down one 'visual' line
+nmap j gj
+" goes up one 'visual' line
+nmap k gk
 nmap <F2> :bp<CR>
 nmap <F3> :bn<CR>
 nmap <F4> :make!<CR>
