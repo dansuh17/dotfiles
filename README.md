@@ -4,6 +4,7 @@
 - [oh-my-zsh](http://ohmyz.sh/)
 - [tmux](https://github.com/tmux/tmux/wiki) - install from package manager
 - git
+- [the silver searcher (ag)](https://github.com/ggreer/the_silver_searcher) not required, but you'll regret if you don't
 
 # backup previous dotfiles
 ```bash
