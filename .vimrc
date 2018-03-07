@@ -131,6 +131,38 @@ if has("gui_macvim")
     autocmd GUIEnter * set vb t_vb=
 endif
 
+" if ag is available, use it over :grep
+" use :copen, :cn, :cp, :cclose, :cr<num> to navigate / open quickfix
+" also find :cdo, :argdo, :bufdo for executions across files
+" NOTE: navigation using :cn or :cp will not work
+" if ag-backed grep is applied on a single file '%' (current file),
+" because ag will not show the file name.
+" use :vimgrep or simply search using '/'
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepformat=%f:%l:%c%m
+endif
+
+" collect open buffers
+function! BuffersList()
+  let all = range(0, bufnr('$'))
+  let res = []
+  for b in all
+    if buflisted(b)
+      call add(res, bufname(b))
+    endif
+  endfor
+  return res
+endfunction
+
+" [!] prevents vimgrep from moving cursor to the first matching result
+function! GrepBuffers(expression)
+  exec 'vimgrep!/'.a:expression.'/ '.join(BuffersList())
+endfunction
+
+" bind K to grep word under cursor for all open buffers
+nnoremap K :call GrepBuffers("<C-R><C-W>")<CR>
+
 " Delete trailing white space on save!!!
 fun! CleanExtraSpaces()
     let save_cursor = getpos(".")
