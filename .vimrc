@@ -90,8 +90,8 @@ set smartcase
 set hlsearch  " highlight search (:noh<cr> to disable)
 set incsearch  " immediately highlight seraches
 " map <space> to search, Ctrl-<space> to backwards search
-map <space> /
-map <c-space> ?
+" map <space> /
+" map <c-space> ?
 
 " advanced
 set autowrite  " auto write when going off to other files
