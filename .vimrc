@@ -9,49 +9,39 @@
 " :profile pause
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle Settings
+" Vim-plug Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Setting up Vundle
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-" :PluginList, :PluginInstall, :PluginClean, :PluginSearch
+" :PlugList, :PlugInstall, :PlugClean, :PlugSearch
 set nocompatible
 filetype off
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" algernatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
+call plug#begin()
 " NOTE that some of these plugins will not properly work if
 " the editor is not macvim.
 " Use 'brew install macvim --with-override-system-vim' command
 " to properly install macvim on OSX.
-"
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'  " required
+
 " Installing YCM - install again if 'ycm server shut down' error occurs
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer --tern-completer
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'  " themes for airline
-Plugin 'edkolev/tmuxline.vim'  " apply airline-synced theme to tmux
-" Plugin 'kien/ctrlp.vim'  " fuzzy finder
-Plugin 'junegunn/fzf'  " fuzzy finder
-Plugin 'junegunn/fzf.vim'
-Plugin 'fugitive.vim'
-" Plugin 'The-NERD-tree'
-Plugin 'surround.vim'  " surround functions
-Plugin 'ntpeters/vim-better-whitespace'  " whitespace hleper
-Plugin 'mileszs/ack.vim'  " use silver searcher
-Plugin 'altercation/vim-colors-solarized'  " solarized colorscheme for vim
-Plugin 'vim-syntastic/syntastic'  " syntactic checker - YCM doesn't provide syntax checking
+Plug 'Valloric/YouCompleteMe'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'  " themes for airline
+Plug 'edkolev/tmuxline.vim'  " apply airline-synced theme to tmux
+Plug 'junegunn/fzf'  " fuzzy finder
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/fugitive.vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tpope/surround.vim'  " surround functions
+Plug 'ntpeters/vim-better-whitespace'  " whitespace hleper
+Plug 'mileszs/ack.vim'  " use silver searcher
+Plug 'altercation/vim-colors-solarized'  " solarized colorscheme for vim
+Plug 'vim-syntastic/syntastic'  " syntactic checker - YCM doesn't provide syntax checking
 
+" Plug 'kien/ctrlp.vim'  " fuzzy finder - replaced by fzf
 
 " All of your plugins must be added before the following line
-call vundle#end()
+call plug#end()
 filetype plugin on
 filetype indent on
 syntax enable
