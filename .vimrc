@@ -38,15 +38,16 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'  " themes for airline
 Plugin 'edkolev/tmuxline.vim'  " apply airline-synced theme to tmux
-Plugin 'kien/ctrlp.vim'  " fuzzy finder
+" Plugin 'kien/ctrlp.vim'  " fuzzy finder
+Plugin 'junegunn/fzf'  " fuzzy finder
+Plugin 'junegunn/fzf.vim'
 Plugin 'fugitive.vim'
 Plugin 'The-NERD-tree'
 Plugin 'surround.vim'  " surround functions
 Plugin 'ntpeters/vim-better-whitespace'  " whitespace hleper
 Plugin 'mileszs/ack.vim'  " use silver searcher
 Plugin 'altercation/vim-colors-solarized'  " solarized colorscheme for vim
-Plugin 'vim-syntastic/syntastic'  " syntactic checker
-Plugin 'SirVer/ultisnips'  " snippet engine
+
 
 " All of your plugins must be added before the following line
 call vundle#end()
@@ -78,6 +79,7 @@ set mat=2  " 0.2sec to blink on matching brackets
 set laststatus=2  " show status line at all times
 set scrolloff=5
 set title  " change terminal's title
+set mouse=a  " enable mouse in all modes
 
 " no annoying sound on errors
 set noerrorbells
