@@ -42,11 +42,12 @@ Plugin 'edkolev/tmuxline.vim'  " apply airline-synced theme to tmux
 Plugin 'junegunn/fzf'  " fuzzy finder
 Plugin 'junegunn/fzf.vim'
 Plugin 'fugitive.vim'
-Plugin 'The-NERD-tree'
+" Plugin 'The-NERD-tree'
 Plugin 'surround.vim'  " surround functions
 Plugin 'ntpeters/vim-better-whitespace'  " whitespace hleper
 Plugin 'mileszs/ack.vim'  " use silver searcher
 Plugin 'altercation/vim-colors-solarized'  " solarized colorscheme for vim
+Plugin 'vim-syntastic/syntastic'  " syntactic checker - YCM doesn't provide syntax checking
 
 
 " All of your plugins must be added before the following line
@@ -248,6 +249,8 @@ nmap <F8> :!ctags -R .<CR>
 " or use a command
 command! MakeTags !ctags -R .
 " use ^] to jump immediately, use g^] for ambiguous tags
+
+" leader mapping
 let mapleader = ","
 let g:mapleader = ","
 
@@ -287,9 +290,10 @@ let g:ycm_key_list_previous_completion=['<S-TAB>', '<Up>']
 let g:ycm_key_detailed_diagnostics='<leader>d'
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_confirm_extra_conf = 0
+let g:ycm_confirm_extra_conf = 1
 let g:ycm_python_binary_path = 'python3'  " semanic completion based on executable interpreter
 let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airline settings
@@ -326,14 +330,14 @@ highlight ExtraWhitespace ctermbg=0xFF0000
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ctrlp options
+" [LEGACY - 2018.06] ctrlp options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " cache for performance
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " use system ag when available - THIS IS SICK!
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+" if executable('ag')
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -350,6 +354,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " syntastic settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" below are default settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
