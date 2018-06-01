@@ -1,10 +1,15 @@
-# requirements
+# pre-install
 
+**required**
 - [zsh](http://www.zsh.org/) - usually installable from package managers (apt, brew, etc)
 - [oh-my-zsh](http://ohmyz.sh/)
 - [tmux](https://github.com/tmux/tmux/wiki) - install from package manager
 - git
-- [the silver searcher (ag)](https://github.com/ggreer/the_silver_searcher) not required, but you'll regret if you don't
+
+**optional**
+- [the silver searcher (ag)](https://github.com/ggreer/the_silver_searcher) : not required, but you'll regret if you don't
+- [fasd](https://github.com/clvv/fasd) : absolutely amazing command-line type-saver based on 'frecency'
+- [fzf](https://github.com/junegunn/fzf) : best fuzzy finder
 
 # backup previous dotfiles
 ```bash
@@ -21,16 +26,17 @@ rmdir dotfiles
 git submodule init
 git submodule update
 ```
-# postinstall
+# post-install
 
 chaning shell to zsh
 ```bash
 chsh -s `which zsh`
 ```
 
-install vundle (vim plugin manager)
+install [vim-plug](https://github.com/junegunn/vim-plug) (vim plugin manager) - personally the best plugin manager so far
 ```bash
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
 to install the plugins listed, run `:PluginInstall` in vi
