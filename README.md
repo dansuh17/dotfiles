@@ -34,3 +34,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
 to install the plugins listed, run `:PluginInstall` in vi
+
+# screenshot
+
+![](https://d2mxuefqeaa7sj.cloudfront.net/s_0EBF1CB4F0F5C1BE3C551B035CA58F5F5CBDE79E3E01743A9DDCC758BC6245A4_1527854433701_image.png)
