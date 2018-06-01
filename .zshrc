@@ -106,11 +106,14 @@ export PATH=$(getconf PATH)
 # export PATH=/usr/local/sbin:$PATH
 
 # LANGUAGE SETTINGS
-export LANG=en_US.utf8
+export LANG="en_US.UTF-8"
+export LC_COLLATE="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-export LC_LANG=ko_KR.UTF8
-export LC_MESSAGES=ko_KR.UTF8
-export NLS_LANG=AMERICAN_CIS.UTF8
 
 ### PATH DEFAULT
 # export PATH=/usr/local/bin:/opt/local/bin:$PATH  # brew
