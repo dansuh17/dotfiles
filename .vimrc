@@ -36,7 +36,8 @@ Plug 'tpope/surround.vim'  " surround functions
 Plug 'ntpeters/vim-better-whitespace'  " whitespace hleper
 Plug 'mileszs/ack.vim'  " use silver searcher
 Plug 'altercation/vim-colors-solarized'  " solarized colorscheme for vim
-Plug 'vim-syntastic/syntastic'  " syntactic checker - YCM doesn't provide syntax checking
+Plug 'w0rp/ale'  " asynchronous linter - vim8 required - use either syntastic or ale not both
+" Plug 'vim-syntastic/syntastic'  " syntactic checker - YCM doesn't provide syntax checking
 
 " Plug 'kien/ctrlp.vim'  " fuzzy finder - replaced by fzf
 
@@ -250,8 +251,10 @@ command! MakeTags !ctags -R .
 let mapleader = ","
 let g:mapleader = ","
 
-" map Ctrl-c to behave the same as <ESC>
-inoremap <C-c> <Esc>
+" map Ctrl-c to behave the same as <ESC> (<C-c> will not trigger InsertLeave event)
+" <Esc> is pressed twice since it will wait for 'timeoutlen' millisecs
+" in case there is a mapping with <Esc>.
+inoremap <C-c> <Esc><Esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " snippets!!
@@ -305,10 +308,6 @@ let g:airline#extensions#ycm#enabled = 1
 let g:airline#extensions#ycm#error_symbol = 'E:'
 " set warning count prefix >
 let g:airline#extensions#ycm#warning_symbol = 'W:'
-" enable tmuxline integration
-" also, powerline/fonts is installed for status bar's
-" non-ascii character support
-let g:airline#extensions#tmuxline#enabled = 1
 " theme
 let g:airline_theme='luna'
 " compatible with fugitive
@@ -316,10 +315,10 @@ let g:airline#extension#branch#enabled = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" tmuxline settings
+" [LEGACY - 2018.06] tmuxline settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " enable all display options
-let g:tmuxline_preset = 'full'
+" let g:tmuxline_preset = 'full'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
