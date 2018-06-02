@@ -222,6 +222,12 @@ colorscheme solarized
 " :echo expand("%:p")
 " only the name
 " :echo expand("%")
+" 
+" opening quickfix
+" :cc
+"
+" opening location list
+" :lopen
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings
@@ -243,6 +249,9 @@ command! MakeTags !ctags -R .
 " leader mapping
 let mapleader = ","
 let g:mapleader = ","
+
+" map Ctrl-c to behave the same as <ESC>
+inoremap <C-c> <Esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " snippets!!
