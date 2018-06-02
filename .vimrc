@@ -24,22 +24,21 @@ call plug#begin()
 " Installing YCM - install again if 'ycm server shut down' error occurs
 " cd ~/.vim/bundle/YouCompleteMe
 " ./install.py --clang-completer --tern-completer
+" or, to enable all features,
+" ./install.py --all
 Plug 'Valloric/YouCompleteMe'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'  " themes for airline
 Plug 'edkolev/tmuxline.vim'  " apply airline-synced theme to tmux
 Plug 'junegunn/fzf'  " fuzzy finder
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/fugitive.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'  " surround functions
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'tpope/surround.vim'  " surround functions
 Plug 'ntpeters/vim-better-whitespace'  " whitespace hleper
 Plug 'mileszs/ack.vim'  " use silver searcher
 Plug 'altercation/vim-colors-solarized'  " solarized colorscheme for vim
 Plug 'w0rp/ale'  " asynchronous linter - vim8 required - use either syntastic or ale not both
-" Plug 'vim-syntastic/syntastic'  " syntactic checker - YCM doesn't provide syntax checking
-
-" Plug 'kien/ctrlp.vim'  " fuzzy finder - replaced by fzf
 
 " All of your plugins must be added before the following line
 call plug#end()
@@ -77,7 +76,6 @@ set mouse=a  " enable mouse in all modes
 set noerrorbells
 set novisualbell
 set t_vb=  " visual bell
-" set foldcolumn=1  " left extra margin
 
 " searching
 set smartcase
