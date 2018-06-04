@@ -27,9 +27,6 @@ call plug#begin()
 " or, to enable all features,
 " ./install.py --all
 Plug 'Valloric/YouCompleteMe'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'  " themes for airline
-Plug 'edkolev/tmuxline.vim'  " apply airline-synced theme to tmux
 Plug 'junegunn/fzf'  " fuzzy finder
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
@@ -39,6 +36,8 @@ Plug 'ntpeters/vim-better-whitespace'  " whitespace hleper
 Plug 'mileszs/ack.vim'  " use silver searcher
 Plug 'altercation/vim-colors-solarized'  " solarized colorscheme for vim
 Plug 'w0rp/ale'  " asynchronous linter - vim8 required - use either syntastic or ale not both
+Plug 'itchyny/lightline.vim'  " status line plugin
+Plug 'maximbaz/lightline-ale'  " lightline + ALE
 
 " All of your plugins must be added before the following line
 call plug#end()
@@ -63,7 +62,6 @@ set ruler  " indicate current position of cursor
 set showcmd	 " show incomplete commands
 set wildmenu  " allow autocompletion with <tab>
 set encoding=utf-8
-set term=xterm-256color  " enables airline within tmux
 set backspace=2  " make backspace work normally
 set showmatch  " show matching brackets when text indicator is over them
 set mat=2  " 0.2sec to blink on matching brackets
@@ -71,6 +69,10 @@ set laststatus=2  " show status line at all times
 set scrolloff=5
 set title  " change terminal's title
 set mouse=a  " enable mouse in all modes
+set noshowmode  " lightline shows the mode for me instead
+
+" try term=screen-256color if this doesn't work for you
+set term=xterm-256color  " enables airline within tmux
 
 " no annoying sound on errors
 set noerrorbells
@@ -81,9 +83,6 @@ set t_vb=  " visual bell
 set smartcase
 set hlsearch  " highlight search (:noh<cr> to disable)
 set incsearch  " immediately highlight seraches
-" map <space> to search, Ctrl-<space> to backwards search
-" map <space> /
-" map <c-space> ?
 
 " advanced
 set autowrite  " auto write when going off to other files
@@ -165,7 +164,7 @@ fun! CleanExtraSpaces()
 endfun
 
 if has("autocmd")
-    autocmd BufWritePre *.c,*.cc,*.js,*.py,*.sh,*.json,*.cpp,*.go,*.h,*.hpp,*hs :call CleanExtraSpaces()
+    autocmd BufWritePre *.c,*.cc,*.js,*.py,*.sh,*.json,*.cpp,*.go,*.h,*.hpp,*hs,.vimrc,.zshrc :call CleanExtraSpaces()
 endif
 
 " dependencies and paths
@@ -235,6 +234,8 @@ colorscheme solarized
 nmap j gj
 " goes up one 'visual' line
 nmap k gk
+
+" function key mappings
 nmap <F2> :bp<CR>
 nmap <F3> :bn<CR>
 nmap <F4> :make!<CR>
@@ -253,6 +254,7 @@ let g:mapleader = ","
 " <Esc> is pressed twice since it will wait for 'timeoutlen' millisecs
 " in case there is a mapping with <Esc>.
 inoremap <C-c> <Esc><Esc>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " snippets!!
@@ -296,23 +298,6 @@ let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" airline settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-" Enable ycm support
-let g:airline#extensions#ycm#enabled = 1
-" set error count prefix >
-let g:airline#extensions#ycm#error_symbol = 'E:'
-" set warning count prefix >
-let g:airline#extensions#ycm#warning_symbol = 'W:'
-" theme
-let g:airline_theme='luna'
-" compatible with fugitive
-let g:airline#extension#branch#enabled = 1
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " [LEGACY - 2018.06] tmuxline settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " enable all display options
@@ -347,16 +332,54 @@ endif
 " cnoreabbrev Ack Ack!
 " nnoremap <leader>a :Ack!<Space>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" syntastic settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" below are default settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ale settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" only run the lint during text change in normal mode
+let g:ale_lint_on_text_changed = 'normal'
+" instead of running the linter always in insert mode,
+" only run the linter when leaving the insert - InsertLeave event
+let g:ale_lint_on_insert_leave = 1
+" 0.5s delay to linter to run after text change
+let g:ale_lint_delay = 500
 
+" specific linters
+let g:ale_linters = {
+  \ 'haskell': ['hlint', 'hdevtools', 'hfmt'],
+  \}
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fzf settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" map to control-p
+nmap <C-p> :Files<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" lightline settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:lightline = {}
+" lightline + ale
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+let g:lightline.component = {
+      \ 'charvaluehex': '0x%B',
+      \ }
+let g:lightline.active = {
+      \ 'right': [['lineinfo'],
+      \           ['percent'],
+      \           [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+      \           ['fileformat', 'fileencoding', 'filetype', 'charvaluehex']],
+      \ }
