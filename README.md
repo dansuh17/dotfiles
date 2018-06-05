@@ -5,6 +5,7 @@
 - [oh-my-zsh](http://ohmyz.sh/)
 - [tmux](https://github.com/tmux/tmux/wiki) - install from package manager
 - git
+- python - to install YouCompleteMe
 
 **optional**
 - [the silver searcher (ag)](https://github.com/ggreer/the_silver_searcher) : not required, but you'll regret if you don't
@@ -17,6 +18,8 @@ mkdir -p ~/.dotfiles.backup
 mv ~/.[^.]* ~/.dotfiles.backup/
 ```
 The error message `mv: rename /Users/[user]/.dotfiles.backup to /Users/[user]/.dotfiles.backup/.dotfiles.backup: Invalid argument` is natural since it cannot place itself inside.
+
+**careful** : This moves ALL dotfiles into the backup folder. Some other configuration files starting with '.' may not work and require restoration.
 
 # get new dotfiles
 ```bash
@@ -39,7 +42,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
-to install the plugins listed, run `:PluginInstall` in vi
+to install the plugins listed, run `:PlugInstall` in vi
 
 # screenshot
 
