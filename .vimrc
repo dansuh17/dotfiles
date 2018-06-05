@@ -78,6 +78,7 @@ set term=xterm-256color  " enables airline within tmux
 set noerrorbells
 set novisualbell
 set t_vb=  " visual bell
+set belloff=all
 
 " searching
 set smartcase
