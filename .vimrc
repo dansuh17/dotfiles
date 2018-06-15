@@ -34,10 +34,22 @@ Plug 'tpope/vim-surround'  " surround functions
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ntpeters/vim-better-whitespace'  " whitespace hleper
 Plug 'mileszs/ack.vim'  " use silver searcher
-Plug 'altercation/vim-colors-solarized'  " solarized colorscheme for vim
 Plug 'w0rp/ale'  " asynchronous linter - vim8 required - use either syntastic or ale not both
 Plug 'itchyny/lightline.vim'  " status line plugin
 Plug 'maximbaz/lightline-ale'  " lightline + ALE
+
+" language syntax highlighting
+Plug 'neovimhaskell/haskell-vim'  " better syntax highlighting for haskell
+
+" colorschemes - uncomment to use
+Plug 'romainl/Apprentice'  " apprentice
+" Plug 'altercation/vim-colors-solarized'  " solarized
+" Plug 'kaicataldo/material.vim'  " material
+" Plug 'nightsense/vimspectr'
+" Plug 'phanviet/vim-monokai-pro'  " monokai_pro
+" Plug 'jnurmine/Zenburn'  " zenburn
+" Plug 'dracula/vim', { 'as': 'dracula' }  " dracula
+" Plug 'arcticicestudio/nord-vim'  " nord
 
 " All of your plugins must be added before the following line
 call plug#end()
@@ -70,9 +82,6 @@ set scrolloff=5
 set title  " change terminal's title
 set mouse=a  " enable mouse in all modes
 set noshowmode  " lightline shows the mode for me instead
-
-" try term=screen-256color if this doesn't work for you
-set term=xterm-256color  " enables airline within tmux
 
 " no annoying sound on errors
 set noerrorbells
@@ -177,11 +186,12 @@ set path+=**
 " ignore when searching files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/\.git/*,*DS_Store*,*/node_modules/*  " OSX/Linux
 
-" must have solarized.vim file in '~/.vim/colors' directory
-" can be done by installing 'altercation/vim-colors-solarized' package
-let g:solarized_termcolors=256  " needed for terminal vims (non-GUI vims)
+" colorscheme
 set background=dark
-colorscheme solarized
+" try term=screen-256color if this doesn't work for you
+set term=xterm-256color
+colorscheme apprentice
+set termguicolors  " should be commented if colorscheme doesn't work properly
 
 " TIPS
 " <using help>
@@ -384,3 +394,15 @@ let g:lightline.active = {
       \           [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
       \           ['fileformat', 'fileencoding', 'filetype', 'charvaluehex']],
       \ }
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" haskell.vim settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
