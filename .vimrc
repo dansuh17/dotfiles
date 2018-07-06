@@ -40,6 +40,7 @@ Plug 'maximbaz/lightline-ale'  " lightline + ALE
 
 " language syntax highlighting
 Plug 'neovimhaskell/haskell-vim'  " better syntax highlighting for haskell
+Plug 'deNsuh/python-syntax'  " better python syntax highlighting
 
 " colorschemes - uncomment to use
 Plug 'romainl/Apprentice'  " apprentice
@@ -309,27 +310,9 @@ let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" [LEGACY - 2018.06] tmuxline settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" enable all display options
-" let g:tmuxline_preset = 'full'
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " better whitespace option
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight ExtraWhitespace ctermbg=0xFF0000
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" [LEGACY - 2018.06] ctrlp options
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" cache for performance
-" let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-" use system ag when available - THIS IS SICK!
-" if executable('ag')
-"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -358,7 +341,10 @@ let g:ale_lint_delay = 500
 " specific linters
 let g:ale_linters = {
   \ 'haskell': ['hlint', 'hdevtools', 'hfmt'],
+  \ 'python': ['flake8', 'pylint'],
   \}
+" ignore annoying errors (column length limit)
+let g:ale_python_flake8_options = '--ignore=E501,E266'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -406,3 +392,8 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" python-syntax settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let python_self_cls_highlight = 1
