@@ -5,7 +5,6 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="re5et"
 ZSH_THEME="lambda"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -54,9 +53,6 @@ plugins=(git colorize colored-man-pages zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -64,16 +60,8 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
 
 # backup dotfiles:
 # mkdir -p ~/.dotfiles.backup
@@ -88,22 +76,18 @@ alias ll='ls -al'
 alias tls='tmux ls'
 alias ta='tmux attach -t'
 
-### VIM - MVIM OR VIM V.8.0 OR ABOVE IS REQUIRED FOR VARIOUS PLUGINS AND COLORSCHEMES
-# alias vi='mvim -v'
-# alias vim='mvim -v'
+# vim
+alias vi='vim'
+# alias vim='mvim -v'  # use only after installing macvim
 
-# git aliases provided oh-my-zsh
-# ga = git add
-# gc = git commit -v
-# gst = git status
-# gc! = git commit --amend
-
-# fasd
-# alias v='f -e vim'  # quick open files with vim
+# IMPORT LOCAL-SPECIFIC ALIASES
+if [ -f ~/.bash_aliases ] ; then
+  source $HOME/.bash_aliases
+fi
 
 ## ENVIRONMENT VARIABLES ##
 export PATH=$(getconf PATH)
-# export PATH=/usr/local/sbin:$PATH
+export PATH=.:$PATH  # add current directory to PATH
 
 # LANGUAGE SETTINGS
 export LANG="en_US.UTF-8"
@@ -115,33 +99,10 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-### PATH DEFAULT
-# export PATH=/usr/local/bin:/opt/local/bin:$PATH  # brew
+### BREW
+# export PATH=/usr/local/bin:/opt/local/bin:$PATH  # OSX brew
 
-# PYTHON
-# pip --version : shows the path to site-packages
-# per package : pip show numpy
-# python-config --include : gives the include path of current python
-
-# JAVA
-# export JAVA_HOME="$(/usr/libexec/java_home)"
-# export PATH=$JAVA_HOME/bin:$PATH
-
-# GO
-# export PATH=/usr/local/go/bin:$PATH
-# export PATH=$(go env GOPATH)/bin:$PATH
-# export GOPATH=$(go env GOPATH)
-
-# HOME FOLDER'S BIN FOLDER
-# export PATH=~/bin:$PATH
-
-# CUDNN - CUDA FOR NEURAL NETWORK .DYLIB PATH
-# export DYLD_LIBRARY_PATH=~/cuda:$DYLD_LIBRARY_PATH
-
-# IMPORT LOCAL-SPECIFIC ALIASES
-# source $HOME/.bash_aliases
-
-### FASD -- MIGHT NEED INSTALL BEFORE USE
+### FASD -- NEED TO INSTALL BEFORE USE
 # eval "$(fasd --init auto)"
 # fasd_cache="$HOME/.fasd-init-zsh"
 # if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
@@ -149,6 +110,7 @@ export LC_ALL="en_US.UTF-8"
 # fi
 # source "$fasd_cache"
 # unset fasd_cache
+# alias v='f -e vim'  # quick open files with vim
 
 ### AUTOMATICALLY ACTIVATE PYHTON VENV SO COOL
 function cd {
