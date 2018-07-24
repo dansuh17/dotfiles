@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+# export ZSH=~/.oh-my-zsh
+export ZSH=$HOME/.dansuh/oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -52,7 +53,6 @@ DISABLE_AUTO_TITLE="true"
 plugins=(git colorize colored-man-pages zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
-
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -60,12 +60,15 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+## ENVIRONMENT VARIABLES ##
+export DOTFILES=$HOME/.dansuh
+export ZSH_BIN=$DOTFILES/zsh_build/bin
+export FASD_BIN=$DOTFILES/fasd/bin
 
-# backup dotfiles:
-# mkdir -p ~/.dotfiles.backup
-# mv ~/.[^.]* ~/.dotfiles.backup/
+# Initial PATH setting
+export PATH=$(getconf PATH)
+export PATH=.:$PATH  # add current directory to PATH
+export PATH=$ZSH_BIN:$FASD_BIN:$PATH
 
 # ls aliases
 alias l='ls -alh'
@@ -73,10 +76,14 @@ alias la='ls -a'
 alias ll='ls -al'
 
 # tmux related aliases
+# use tmux server with separate socket using separate conf
+alias tmux='tmux -L dansuh -f $DOTFILES/.tmux.conf'
 alias tls='tmux ls'
 alias ta='tmux attach -t'
 
 # vim
+export VIMINIT="source $DOTFILES/.vimrc"
+alias vim='vim -u $DOTFILES/.vimrc'
 alias vi='vim'
 # alias vim='mvim -v'  # use only after installing macvim
 
@@ -84,10 +91,6 @@ alias vi='vim'
 if [ -f ~/.bash_aliases ] ; then
   source $HOME/.bash_aliases
 fi
-
-## ENVIRONMENT VARIABLES ##
-export PATH=$(getconf PATH)
-export PATH=.:$PATH  # add current directory to PATH
 
 # LANGUAGE SETTINGS
 export LANG="en_US.UTF-8"
@@ -103,14 +106,14 @@ export LC_ALL="en_US.UTF-8"
 # export PATH=/usr/local/bin:/opt/local/bin:$PATH  # OSX brew
 
 ### FASD -- NEED TO INSTALL BEFORE USE
-# eval "$(fasd --init auto)"
-# fasd_cache="$HOME/.fasd-init-zsh"
-# if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-#   fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
-# fi
-# source "$fasd_cache"
-# unset fasd_cache
-# alias v='f -e vim'  # quick open files with vim
+eval "$(fasd --init auto)"
+fasd_cache="$HOME/.fasd-init-zsh"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+alias v='f -e vim'  # quick open files with vim
 
 ### AUTOMATICALLY ACTIVATE PYHTON VENV SO COOL
 function cd {
@@ -119,3 +122,6 @@ function cd {
     source venv/bin/activate
   fi
 }
+
+# Greet message
+echo "Work Harder Bitch"

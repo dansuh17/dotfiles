@@ -1,4 +1,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Custom RTP
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" this will make you NOT use ~/.vim but use the alternative path
+let &rtp = substitute(&rtp, $HOME."/\.vim", "$HOME/\.dansuh\.vim", "g")
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Profiling
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Run the following commands in order to check what's making your vim slow.
@@ -64,7 +70,7 @@ syntax enable
 " formattings and editor functionalities
 set number  " line number
 " `relativenumber` disabled due to slow scrolling (multiple regex function execution happening)
-" set relativenumber  
+" set relativenumber
 set autoindent
 set cindent
 set tabstop=2  " tab = 2 spaces
@@ -175,7 +181,7 @@ fun! CleanExtraSpaces()
 endfun
 
 if has("autocmd")
-    autocmd BufWritePre *.c,*.cc,*.js,*.py,*.sh,*.json,*.cpp,*.go,*.h,*.hpp,*hs,.vimrc,.zshrc :call CleanExtraSpaces()
+    autocmd BufWritePre *.c,*.cc,*.js,*.py,*.sh,*.json,*.cpp,*.go,*.h,*.hpp,*.hs,.vimrc,.zshrc :call CleanExtraSpaces()
 endif
 
 " dependencies and paths
@@ -191,7 +197,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/\.git/*,*DS_Store*,*/node_modules/*  
 set background=dark
 " try term=screen-256color if this doesn't work for you
 set term=xterm-256color
-colorscheme apprentice
+silent! colorscheme apprentice
 set termguicolors  " should be commented if colorscheme doesn't work properly
 
 " TIPS
@@ -232,7 +238,7 @@ set termguicolors  " should be commented if colorscheme doesn't work properly
 " :echo expand("%:p")
 " only the name
 " :echo expand("%")
-" 
+"
 " opening quickfix
 " :cc
 "
