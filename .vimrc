@@ -2,7 +2,7 @@
 " Custom RTP
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " this will make you NOT use ~/.vim but use the alternative path
-let &rtp = substitute(&rtp, $HOME."/\.vim", "$HOME/\.dansuh\.vim", "g")
+let &rtp = substitute(&rtp, $HOME."/\.vim", "$HOME/\.dansuh/\.vim", "g")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Profiling
@@ -32,7 +32,7 @@ call plug#begin()
 " ./install.py --clang-completer --tern-completer
 " or, to enable all features,
 " ./install.py --all
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'junegunn/fzf'  " fuzzy finder
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
@@ -94,7 +94,7 @@ set noshowmode  " lightline shows the mode for me instead
 set noerrorbells
 set novisualbell
 set t_vb=  " visual bell
-set belloff=all
+silent! set belloff=all
 
 " searching
 set smartcase
@@ -198,7 +198,7 @@ set background=dark
 " try term=screen-256color if this doesn't work for you
 set term=xterm-256color
 silent! colorscheme apprentice
-set termguicolors  " should be commented if colorscheme doesn't work properly
+silent! set termguicolors  " should be commented if colorscheme doesn't work properly
 
 " TIPS
 " <using help>

@@ -51,8 +51,9 @@ curl -fLo $DOT_VIM_DIR/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 echo "vim-plug installed"
 
+# install plugins
 vim -u $VIM_CONF +PlugInstall +qall
-echo "vim pluginst installed"
+echo "vim plugins installed"
 
 # install fasd
 wget -O fasd-1.0.1.tar.gz -c https://github.com/clvv/fasd/tarball/1.0.1
@@ -63,9 +64,23 @@ PREFIX=./ make install
 popd
 echo "fasd installed"
 
+type tmux
+if [ $? -ne 0 ] ; then
+  echo "tmux doesn't exist - installation preferred"
+fi
+
+type ag
+if [ $? -ne 0 ] ; then
+  echo "ag doesn't exist - installation preferred"
+fi
+
+type fzf
+if [ $? -ne 0 ] ; then
+  echo "fzf doesn't exist - installation preferred"
+fi
+
 # add init source
-function ds_init {
-  ZDOTDIR=$DOTFILE_DIR $ZSH_BUILD/bin/zsh
-}
-echo $(declare -f ds_init) >> ~/.bashrc
+INIT_FUNCTION="ds_init() { ZDOTDIR=$DOTFILE_DIR $ZSH_BUILD/bin/zsh ; }"
+echo INIT_FUNCTION >> ~/.bashrc
 echo "Type 'ds_init' to initialize with dansuh's custom settings!"
+source ~/.bashrc
