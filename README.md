@@ -47,3 +47,12 @@ to install the plugins listed, run `:PlugInstall` in vi
 # screenshot
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_0EBF1CB4F0F5C1BE3C551B035CA58F5F5CBDE79E3E01743A9DDCC758BC6245A4_1527854433701_image.png)
+
+# auto-install
+
+```bash
+./install.sh
+```
+
+This will create a custom folder at `$HOME/.dansuh` and copy all conf files into that folder.
+A initializer command will be appended to `.bashrc` to make the shell use custom configuration files from `$HOME/.dansuh`.
