@@ -11,6 +11,7 @@
 !.gitconfig
 !README.md
 !.ideavimrc
+!install.sh
 
 # first whitelist the folder
 !.vim/
