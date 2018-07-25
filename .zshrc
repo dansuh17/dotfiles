@@ -70,13 +70,13 @@ alias ll='ls -al'
 
 # tmux related aliases
 # use tmux server with separate socket using separate conf
-alias tmux='tmux -L dansuh -f $DOTFILES/.tmux.conf'
+alias tmux='tmux -L dansuh -f $DOTFILE_ROOT/.tmux.conf'
 alias tls='tmux ls'
 alias ta='tmux attach -t'
 
 # vim
-export VIMINIT="source $DOTFILES/.vimrc"
-alias vim='vim -u $DOTFILES/.vimrc'
+export VIMINIT="source $DOTFILE_ROOT/.vimrc"
+alias vim='vim -u $DOTFILE_ROOT/.vimrc'
 alias vi='vim'
 # alias vim='mvim -v'  # use only after installing macvim
 
