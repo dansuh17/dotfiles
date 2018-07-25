@@ -79,9 +79,21 @@ if [ $? -ne 0 ] ; then
   echo "fzf doesn't exist - installation preferred"
 fi
 
-# add init source
 ZSHRC_PATH=$DOTFILE_DIR/.zshrc
-printf '%s\n%s\n' "\$PATH=$ZSH_BUILD/bin:\$PATH" "$(cat "$ZSHRC_PATH")" > "$ZSHRC_PATH"
+
+prepend_zshrc() {
+  printf '%s\n%s\n' "$1" "$(cat "$ZSHRC_PATH")" > "$ZSHRC_PATH"
+}
+
+# inherit path variables
+prepend_zshrc "export PATH=\$ZSH_BIN:\$FASD_BIN:\$PATH"
+prepend_zshrc "export FASD_BIN=$DOTFILE_DIR/fasd/bin"
+prepend_zshrc "export ZSH_BIN=$ZSH_BUILD/bin"
+prepend_zshrc "export DOTFILE_ROOT=$DOTFILE_DIR"
+prepend_zshrc "export ZSH=$DOTFILE_DIR/oh-my-zsh"
+prepend_zshrc "\# Generated Environment Variables and PATHs - inherits existing PATH."
+
+# add init function
 INIT_FUNCTION="ds_init() { ZDOTDIR=$DOTFILE_DIR $ZSH_BUILD/bin/zsh ; }"
 echo "$INIT_FUNCTION" >> ~/.bashrc
 echo "Type 'ds_init' to initialize with dansuh's custom settings!"
