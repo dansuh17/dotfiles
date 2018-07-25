@@ -91,7 +91,7 @@ prepend_zshrc "export FASD_BIN=$DOTFILE_DIR/fasd/bin"
 prepend_zshrc "export ZSH_BIN=$ZSH_BUILD/bin"
 prepend_zshrc "export DOTFILE_ROOT=$DOTFILE_DIR"
 prepend_zshrc "export ZSH=$DOTFILE_DIR/oh-my-zsh"
-prepend_zshrc "\# Generated Environment Variables and PATHs - inherits existing PATH."
+prepend_zshrc "# Generated Environment Variables and PATHs - inherits existing PATH."
 
 # add init function
 INIT_FUNCTION="ds_init() { ZDOTDIR=$DOTFILE_DIR $ZSH_BUILD/bin/zsh ; }"
