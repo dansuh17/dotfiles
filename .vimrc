@@ -193,12 +193,12 @@ set path+=**
 " ignore when searching files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/\.git/*,*DS_Store*,*/node_modules/*  " OSX/Linux
 
-" colorscheme
+" colorscheme - very sensitive stuff :(
 set background=dark
 " try term=screen-256color if this doesn't work for you
-set term=xterm-256color
+" set term=xterm-256color
 silent! colorscheme apprentice
-silent! set termguicolors  " should be commented if colorscheme doesn't work properly
+" silent! set termguicolors  " should be uncommented if colorscheme doesn't work properly
 
 " TIPS
 " <using help>

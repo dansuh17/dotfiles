@@ -1,6 +1,5 @@
 # Path to your oh-my-zsh installation.
 # export ZSH=~/.oh-my-zsh
-export ZSH=$HOME/.dansuh/oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -60,15 +59,9 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-## ENVIRONMENT VARIABLES ##
-export DOTFILES=$HOME/.dansuh
-export ZSH_BIN=$DOTFILES/zsh_build/bin
-export FASD_BIN=$DOTFILES/fasd/bin
-
-# Initial PATH setting
-export PATH=$(getconf PATH)
+# Custom PATH setting
+export PATH=$(getconf PATH):$PATH
 export PATH=.:$PATH  # add current directory to PATH
-export PATH=$ZSH_BIN:$FASD_BIN:$PATH
 
 # ls aliases
 alias l='ls -alh'
@@ -77,13 +70,13 @@ alias ll='ls -al'
 
 # tmux related aliases
 # use tmux server with separate socket using separate conf
-alias tmux='tmux -L dansuh -f $DOTFILES/.tmux.conf'
+alias tmux='tmux -L dansuh -f $DOTFILE_ROOT/.tmux.conf'
 alias tls='tmux ls'
 alias ta='tmux attach -t'
 
 # vim
-export VIMINIT="source $DOTFILES/.vimrc"
-alias vim='vim -u $DOTFILES/.vimrc'
+export VIMINIT="source $DOTFILE_ROOT/.vimrc"
+alias vim='vim -u $DOTFILE_ROOT/.vimrc'
 alias vi='vim'
 # alias vim='mvim -v'  # use only after installing macvim
 
