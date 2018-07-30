@@ -26,22 +26,16 @@ call plug#begin()
 " the editor is not macvim.
 " Use 'brew install macvim --with-override-system-vim' command
 " to properly install macvim on OSX.
-
-" Installing YCM - install again if 'ycm server shut down' error occurs
-" cd ~/.vim/bundle/YouCompleteMe
-" ./install.py --clang-completer --tern-completer
-" or, to enable all features,
-" ./install.py --all
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'junegunn/fzf'  " fuzzy finder
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'  " surround functions
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'ntpeters/vim-better-whitespace'  " whitespace hleper
+Plug 'ntpeters/vim-better-whitespace'  " whitespace helper
 Plug 'mileszs/ack.vim'  " use silver searcher
 Plug 'w0rp/ale'  " asynchronous linter - vim8 required - use either syntastic or ale not both
 Plug 'itchyny/lightline.vim'  " status line plugin
+Plug 'mgee/lightline-bufferline'  " show buffers to tabline
 Plug 'maximbaz/lightline-ale'  " lightline + ALE
 
 " language syntax highlighting
@@ -85,6 +79,7 @@ set backspace=2  " make backspace work normally
 set showmatch  " show matching brackets when text indicator is over them
 set mat=2  " 0.2sec to blink on matching brackets
 set laststatus=2  " show status line at all times
+set showtabline=2  " always show tabline
 set scrolloff=5
 set title  " change terminal's title
 set mouse=a  " enable mouse in all modes
@@ -257,7 +252,6 @@ nmap k gk
 nmap <F2> :bp<CR>
 nmap <F3> :bn<CR>
 nmap <F4> :make!<CR>
-nmap <F6> :NERDTreeToggle<CR>
 nmap <F7> :nohl<CR>
 nmap <F8> :!ctags -R .<CR>
 " or use a command
@@ -293,29 +287,6 @@ let NERDTreeIgnore=['\.pyc$', '\~$']  " ignore these files in NERDTree
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" YouCompleteMe Settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" YCM has to be compiled before using!
-" use --clang-compeleter option
-"
-" maps GoTo command. It goes to most reasonable of eithr : declaration or
-" definition.
-" It populates vim's jumplist so that we can go back and forward using
-" <C-O> and <C-I>, respectively.
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
-nnoremap <leader>jr :YcmCompleter GoToReference<CR>
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:ycm_key_list_select_completion=['<TAB>', '<Down>']
-let g:ycm_key_list_previous_completion=['<S-TAB>', '<Up>']
-let g:ycm_key_detailed_diagnostics='<leader>d'
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_confirm_extra_conf = 1
-let g:ycm_python_binary_path = 'python3'  " semanic completion based on executable interpreter
-let g:ycm_server_python_interpreter = '/usr/local/bin/python3'
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " better whitespace option
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight ExtraWhitespace ctermbg=0xFF0000
@@ -345,9 +316,11 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_delay = 500
 
 " specific linters
+" python : pip install flake8 pylint pyls
+" haskell : stack install hlint hdevtools hfmt
 let g:ale_linters = {
   \ 'haskell': ['hlint', 'hdevtools', 'hfmt'],
-  \ 'python': ['flake8', 'pylint'],
+  \ 'python': ['flake8', 'pylint', 'pyls'],
   \}
 " ignore annoying errors (column length limit)
 let g:ale_python_flake8_options = '--ignore=E501,E266'
@@ -370,13 +343,15 @@ let g:lightline.component_expand = {
       \  'linter_warnings': 'lightline#ale#warnings',
       \  'linter_errors': 'lightline#ale#errors',
       \  'linter_ok': 'lightline#ale#ok',
-      \ }
+      \  'buffers': 'lightline#bufferline#buffers',
+      \}
 let g:lightline.component_type = {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
-      \ }
+      \  'linter_checking': 'left',
+      \  'linter_warnings': 'warning',
+      \  'linter_errors': 'error',
+      \  'linter_ok': 'left',
+      \  'buffers': 'tabsel',
+      \}
 let g:lightline.component = {
       \ 'charvaluehex': '0x%B',
       \ }
@@ -386,6 +361,8 @@ let g:lightline.active = {
       \           [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
       \           ['fileformat', 'fileencoding', 'filetype', 'charvaluehex']],
       \ }
+let g:lightline.tabline = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline#bufferline#show_number = 1  " show buffer number as in :ls
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
