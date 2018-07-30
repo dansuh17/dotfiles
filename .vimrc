@@ -37,6 +37,7 @@ Plug 'w0rp/ale'  " asynchronous linter - vim8 required - use either syntastic or
 Plug 'itchyny/lightline.vim'  " status line plugin
 Plug 'mgee/lightline-bufferline'  " show buffers to tabline
 Plug 'maximbaz/lightline-ale'  " lightline + ALE
+Plug 'ludovicchabant/vim-gutentags'  " automatic tags file generator
 
 " language syntax highlighting
 Plug 'neovimhaskell/haskell-vim'  " better syntax highlighting for haskell
@@ -363,6 +364,18 @@ let g:lightline.active = {
       \ }
 let g:lightline.tabline = {'left': [['buffers']], 'right': [['close']]}
 let g:lightline#bufferline#show_number = 1  " show buffer number as in :ls
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" gutentags settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:gutentags_ctags_executable = '/usr/local/bin/ctags'  " [OSX] use brew-installed ctags
+set statusline+=%{gutentags#statusline()}
+augroup MyGutentagsStatusLineRefresher
+    autocmd!
+    autocmd User GutentagsUpdating call lightline#update()
+    autocmd User GutentagsUpdated call lightline#update()
+augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
