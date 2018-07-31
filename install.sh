@@ -64,9 +64,15 @@ PREFIX=./ make install
 popd
 echo "fasd installed"
 
+# install liquidprompt
+git clone https://github.com/nojhan/liquidprompt.git $DOTFILE_DIR/liquidprompt
+
 type tmux
 if [ $? -ne 0 ] ; then
   echo "tmux doesn't exist - installation preferred"
+else
+  echo "tmux exists: installing tmux plugin manager..."
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
 type ag
@@ -86,6 +92,7 @@ prepend_zshrc() {
 }
 
 # inherit path variables
+prepend_zshrc "[[ $- = *i* ]] && source $DOTFILE_DIR/liquidprompt/liquidprompt"
 prepend_zshrc "export PATH=\$ZSH_BIN:\$FASD_BIN:\$PATH"
 prepend_zshrc "export GIT_EDITOR=vim"
 prepend_zshrc "export FASD_BIN=$DOTFILE_DIR/fasd/bin"

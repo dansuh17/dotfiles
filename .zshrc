@@ -1,11 +1,8 @@
-# Path to your oh-my-zsh installation.
-# export ZSH=~/.oh-my-zsh
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="lambda"
+# ZSH_THEME="lambda"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -80,7 +77,7 @@ alias vim='vim -u $DOTFILE_ROOT/.vimrc'
 alias vi='vim'
 # alias vim='mvim -v'  # use only after installing macvim
 
-# IMPORT LOCAL-SPECIFIC ALIASES
+# IMPORT LOCAL ALIASES
 if [ -f ~/.bash_aliases ] ; then
   source $HOME/.bash_aliases
 fi
@@ -115,6 +112,10 @@ function cd {
     source venv/bin/activate
   fi
 }
+
+### ctags
+# generate python tags for site-packages
+alias pytags="ctags -R --fields=+l -f ./tags . $(python -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))")"
 
 # Greet message
 echo "Work Harder Bitch"
