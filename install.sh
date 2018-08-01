@@ -66,7 +66,12 @@ echo "fasd installed"
 
 # install liquidprompt
 git clone https://github.com/nojhan/liquidprompt.git $DOTFILE_DIR/liquidprompt
+cp $DOTFILE_DIR/liquidprompt/liquidpromptrc-dist ~/.config/liquidpromptrc
+cp -f dansuh_liquidprompt.theme ~/.config/  # use custom theme
+echo "source ~/.config/dansuh_liquidprompt.theme" >> ~/.config/liquidpromptrc
 
+
+# check for other different applications
 type tmux
 if [ $? -ne 0 ] ; then
   echo "tmux doesn't exist - installation preferred"
