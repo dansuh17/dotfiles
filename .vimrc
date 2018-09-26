@@ -80,17 +80,18 @@ set backspace=2  " make backspace work normally
 set showmatch  " show matching brackets when text indicator is over them
 set mat=2  " 0.2sec to blink on matching brackets
 set laststatus=2  " show status line at all times
-set showtabline=2  " always show tabline
 set scrolloff=5
 set title  " change terminal's title
 set mouse=a  " enable mouse in all modes
 set noshowmode  " lightline shows the mode for me instead
+set showtabline=2  " always show tabline
+set completeopt=menu,menuone,preview,noselect,noinsert
 
 " no annoying sound on errors
 set noerrorbells
 set novisualbell
 set t_vb=  " visual bell
-silent! set belloff=all
+silent! set belloff=all  " silent because it might not work for some versions
 
 " searching
 set smartcase
@@ -116,7 +117,7 @@ set history=700  " remember up to n histories
 set timeoutlen=500  " timeout length on mappings and key codes
 " marks remembered for last 100 files, 3000 line limit to yank,
 " registers with more than 100kB text are skipped
-set viminfo='100,<3000,s100
+set viminfo='100,<30000,s100
 
 " Return to last edit position when opening files (You want this!)
 " WOWW
@@ -132,7 +133,7 @@ set pastetoggle=<F10>  " map paste toggle key
 
 " disable sound on errors on MacVim
 if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
+  autocmd GUIEnter * set vb t_vb=
 endif
 
 " if ag is available, use it over :grep
@@ -169,15 +170,15 @@ nnoremap K :call GrepBuffers("<C-R><C-W>")<CR>
 
 " Delete trailing white space on save!!!
 fun! CleanExtraSpaces()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
+  let save_cursor = getpos(".")
+  let old_query = getreg('/')
+  silent! %s/\s\+$//e
+  call setpos('.', save_cursor)
+  call setreg('/', old_query)
 endfun
 
 if has("autocmd")
-    autocmd BufWritePre *.c,*.cc,*.js,*.py,*.sh,*.json,*.cpp,*.go,*.h,*.hpp,*.hs,.vimrc,.zshrc :call CleanExtraSpaces()
+  autocmd BufWritePre *.c,*.cc,*.js,*.py,*.sh,*.json,*.cpp,*.go,*.h,*.hpp,*.hs,.vimrc,.zshrc,*.java,*.scala :call CleanExtraSpaces()
 endif
 
 " dependencies and paths
@@ -240,6 +241,19 @@ silent! colorscheme apprentice
 "
 " opening location list
 " :lopen
+"
+" displays the last line number
+" :=
+"
+" execute normal command
+" :norm {commands}
+"
+" repeat the last :!{cmd} (shell command)
+" :!!
+"
+" auto reindent entire file
+" g=GG
+" (see ':help =' for more)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key Mappings
@@ -260,13 +274,23 @@ command! MakeTags !ctags -R .
 " use ^] to jump immediately, use g^] for ambiguous tags
 
 " leader mapping
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = "-"
+let g:mapleader = "-"
 
 " map Ctrl-c to behave the same as <ESC> (<C-c> will not trigger InsertLeave event)
 " <Esc> is pressed twice since it will wait for 'timeoutlen' millisecs
 " in case there is a mapping with <Esc>.
 inoremap <C-c> <Esc><Esc>
+
+" keymap that opens .vimrc in a split window
+" mnemonic: 'e'dit my 'v'imrc file
+nnoremap <leader>ev :vs $MYVIMRC<cr>
+" 's'ourcing my 'v'imrc file
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" commenting out
+autocmd FileType javascript nnoremap <C-/> I//<C-c>
+autocmd FileType vim nnoremap <leader>c I"<esc>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -315,14 +339,17 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 " 0.5s delay to linter to run after text change
 let g:ale_lint_delay = 500
+" Enable completion
+let g:ale_completion_enabled = 1
 
 " specific linters
 " python : pip install flake8 pylint pyls
 " haskell : stack install hlint hdevtools hfmt
 let g:ale_linters = {
-  \ 'haskell': ['hlint', 'hdevtools', 'hfmt'],
-  \ 'python': ['flake8', 'pylint', 'pyls'],
-  \}
+      \ 'haskell': ['hlint', 'hdevtools', 'hfmt'],
+      \ 'python': ['flake8', 'pyls'],
+      \}
+
 " ignore annoying errors (column length limit)
 let g:ale_python_flake8_options = '--ignore=E501,E266'
 
@@ -331,7 +358,7 @@ let g:ale_python_flake8_options = '--ignore=E501,E266'
 " fzf settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map to control-p
-nmap <C-p> :Files<CR>
+nnoremap <C-p> :Files<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -372,24 +399,26 @@ let g:lightline#bufferline#show_number = 1  " show buffer number as in :ls
 " let g:gutentags_ctags_executable = '/usr/local/bin/ctags'  " [OSX] use brew-installed ctags
 set statusline+=%{gutentags#statusline()}
 augroup MyGutentagsStatusLineRefresher
-    autocmd!
-    autocmd User GutentagsUpdating call lightline#update()
-    autocmd User GutentagsUpdated call lightline#update()
+  autocmd!
+  autocmd User GutentagsUpdating call lightline#update()
+  autocmd User GutentagsUpdated call lightline#update()
 augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" haskell.vim settings
+" haskell-vim settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_quantification = 1  " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1  " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1  " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1  " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1  " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+let g:haskell_backpack = 1  " to enable highlighting of backpack keywords
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" python-syntax settings
+" python-vim settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" enable everything except space highlights
 let python_self_cls_highlight = 1
