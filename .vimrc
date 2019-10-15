@@ -73,7 +73,7 @@ set expandtab  " expand tab into spaces
 set shiftwidth=2
 set shiftround  " round indents to multiple of shiftwidth
 set ruler  " indicate current position of cursor
-set showcmd	 " show incomplete commands
+set showcmd  " show incomplete commands
 set wildmenu  " allow autocompletion with <tab>
 set encoding=utf-8
 set backspace=2  " make backspace work normally
