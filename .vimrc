@@ -85,6 +85,8 @@ set title  " change terminal's title
 set mouse=a  " enable mouse in all modes
 set noshowmode  " lightline shows the mode for me instead
 set showtabline=2  " always show tabline
+set nrformats-=octal  " disable octal number increment / decrement
+set showtabline=2  " always show tabline"
 set completeopt=menu,menuone,preview,noselect,noinsert
 
 " no annoying sound on errors
