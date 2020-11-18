@@ -129,6 +129,7 @@ prepend_zshrc "export VIM_CONFIG_PATH=$DOTFILE_DIR"
 prepend_zshrc "export GIT_CONFIG=$DOTFILE_DIR/.gitconfig"
 prepend_zshrc "export DOTFILE_ROOT=$DOTFILE_DIR"
 prepend_zshrc "export ZSH=$DOTFILE_DIR/oh-my-zsh"
+prepend_zshrc "export ZSH_PATH=$ZSH_PATH"
 prepend_zshrc "# Generated Environment Variables and PATHs - inherits existing PATH."
 
 # add init function
