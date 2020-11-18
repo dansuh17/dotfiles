@@ -8,12 +8,16 @@ else
   DOTFILE_DIR="$1"
 fi
 
-if [ -d "$DOTFILE_DIR" ] ; then
-  rm -rf "$DOTFILE_DIR"
+# create dotfile directory if it does not exist
+if ! [ -d "$DOTFILE_DIR" ] ; then
+  echo "Creating directory : $DOTFILE_DIR"
+  mkdir "$DOTFILE_DIR"
 fi
 
-echo "Creating directory : $DOTFILE_DIR"
-mkdir "$DOTFILE_DIR"
+# retrieve the directory where this install script lies
+SCRIPT_DIR="$(cd "$(dirname "${0}")" && pwd)"
+
+pushd "${SCRIPT_DIR}"
 
 # copy everything to this directory
 cp .gitconfig "$DOTFILE_DIR"/
@@ -24,6 +28,8 @@ cp -r .vim "$DOTFILE_DIR"/
 cp .vimrc "$DOTFILE_DIR"/
 cp .ycm_extra_conf.py "$DOTFILE_DIR"/
 cp .zshrc "$DOTFILE_DIR"/
+
+popd
 
 # move to dotfile directory
 cd "$DOTFILE_DIR"
