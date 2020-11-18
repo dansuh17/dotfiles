@@ -4,6 +4,7 @@
 # Except these
 !.vimrc
 !.bash_profile
+!Dockerfile
 !.zshrc
 !.gitignore
 !.ycm_extra_conf.py
