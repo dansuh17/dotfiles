@@ -1,9 +1,17 @@
 #!/bin/bash
 
-DOTFILE_DIR=$HOME/.dansuh
+set -eu
+
+if [ $# -ne 1 ]; then
+  DOTFILE_DIR=$HOME/.dansuh
+else
+  DOTFILE_DIR="$1"
+fi
+
 if [ -d "$DOTFILE_DIR" ] ; then
   rm -rf "$DOTFILE_DIR"
 fi
+
 echo "Creating directory : $DOTFILE_DIR"
 mkdir "$DOTFILE_DIR"
 
