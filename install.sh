@@ -34,22 +34,35 @@ popd
 # move to dotfile directory
 cd "$DOTFILE_DIR"
 
-ZSH_BUILD=$DOTFILE_DIR/zsh_build
-# create build directory
-if ! [ -d "$ZSH_BUILD" ] ; then
-  mkdir "$ZSH_BUILD"
-fi
+ZSHRC_PATH=$DOTFILE_DIR/.zshrc
+
+prepend_zshrc() {
+  printf '%s\n%s\n' "$1" "$(cat "$ZSHRC_PATH")" > "$ZSHRC_PATH"
+}
 
 # download and install zsh
-wget -c http://www.zsh.org/pub/zsh-5.5.1.tar.gz
-tar -xzvf zsh-5.5.1.tar.gz
-pushd zsh-5.5.1
-./configure --prefix="$ZSH_BUILD" --exec-prefix="$ZSH_BUILD" --enable-cap --enable-pcre
-make -j5
-make check
-make install
-popd
-echo "zsh installed"
+type zsh
+if [ $? -ne 0 ]; then
+  echo "zsh does not exist - installing"
+
+  ZSH_BUILD=$DOTFILE_DIR/zsh_build
+  # create build directory
+  if ! [ -d "$ZSH_BUILD" ] ; then
+    mkdir "$ZSH_BUILD"
+  fi
+
+  wget -c http://www.zsh.org/pub/zsh-5.5.1.tar.gz
+  tar -xzvf zsh-5.5.1.tar.gz
+  pushd zsh-5.5.1
+  ./configure --prefix="$ZSH_BUILD" --exec-prefix="$ZSH_BUILD" --enable-cap --enable-pcre
+  make -j5
+  make check
+  make install
+  popd
+
+  prepend_zshrc "export ZSH_BIN=$ZSH_BUILD/bin"
+  echo "zsh installed"
+fi
 
 # install oh-my-zsh and follow the steps
 git clone https://github.com/robbyrussell/oh-my-zsh.git "$DOTFILE_DIR"/oh-my-zsh
@@ -104,18 +117,11 @@ if [ $? -ne 0 ] ; then
   echo "fzf doesn't exist - installation preferred"
 fi
 
-ZSHRC_PATH=$DOTFILE_DIR/.zshrc
-
-prepend_zshrc() {
-  printf '%s\n%s\n' "$1" "$(cat "$ZSHRC_PATH")" > "$ZSHRC_PATH"
-}
-
 # inherit path variables
 prepend_zshrc "[[ \$- = *i* ]] && source $DOTFILE_DIR/liquidprompt/liquidprompt"
 prepend_zshrc "export PATH=\$ZSH_BIN:\$FASD_BIN:\$PATH"
 prepend_zshrc "export GIT_EDITOR=vim"
 prepend_zshrc "export FASD_BIN=$DOTFILE_DIR/fasd/bin"
-prepend_zshrc "export ZSH_BIN=$ZSH_BUILD/bin"
 prepend_zshrc "export GIT_CONFIG=$DOTFILE_DIR/.gitconfig"
 prepend_zshrc "export DOTFILE_ROOT=$DOTFILE_DIR"
 prepend_zshrc "export ZSH=$DOTFILE_DIR/oh-my-zsh"
