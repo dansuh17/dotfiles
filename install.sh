@@ -41,8 +41,7 @@ prepend_zshrc() {
 }
 
 # download and install zsh
-type zsh
-if [ $? -ne 0 ]; then
+if ! command -v zsh &> /dev/null ; then
   echo "zsh does not exist - installing"
 
   ZSH_BUILD=$DOTFILE_DIR/zsh_build
@@ -62,6 +61,10 @@ if [ $? -ne 0 ]; then
 
   prepend_zshrc "export ZSH_BIN=$ZSH_BUILD/bin"
   echo "zsh installed"
+
+  ZSH_PATH=$ZSH_BUILD
+else
+  ZSH_PATH=$(dirname $(which zsh))
 fi
 
 # install oh-my-zsh and follow the steps
@@ -78,8 +81,8 @@ curl -fLo "$DOT_VIM_DIR"/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 echo "vim-plug installed"
 
-# install plugins
-vim -u "$VIM_CONF" +PlugInstall +qall
+# install vim plugins
+VIM_CONFIG_PATH=$DOTFILE_DIR vim -u "$VIM_CONF" '+PlugInstall --sync' +qall &> /dev/null || true
 echo "vim plugins installed"
 
 # install fasd
@@ -92,10 +95,12 @@ popd
 echo "fasd installed"
 
 # install liquidprompt
-git clone https://github.com/nojhan/liquidprompt.git $DOTFILE_DIR/liquidprompt
-cp $DOTFILE_DIR/liquidprompt/liquidpromptrc-dist ~/.config/liquidpromptrc
-cp -f dansuh_liquidprompt.theme ~/.config/  # use custom theme
-echo "source ~/.config/dansuh_liquidprompt.theme" >> ~/.config/liquidpromptrc
+# git clone https://github.com/nojhan/liquidprompt.git $DOTFILE_DIR/liquidprompt
+# # create config directory if it doesnt exist
+# mkdir -p ~/.config
+# cp $DOTFILE_DIR/liquidprompt/liquidpromptrc-dist ~/.config/liquidpromptrc
+# cp -f "${SCRIPT_DIR}/dansuh_liquidprompt.theme" ~/.config/  # use custom theme
+# echo "source ~/.config/dansuh_liquidprompt.theme" >> ~/.config/liquidpromptrc
 
 
 # check for other different applications
@@ -107,28 +112,29 @@ else
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-type ag
-if [ $? -ne 0 ] ; then
+if ! command -v ag &> /dev/null ; then
   echo "ag doesn't exist - installation preferred"
 fi
 
-type fzf
-if [ $? -ne 0 ] ; then
+if ! command -v fzf &> /dev/null ; then
   echo "fzf doesn't exist - installation preferred"
 fi
 
 # inherit path variables
-prepend_zshrc "[[ \$- = *i* ]] && source $DOTFILE_DIR/liquidprompt/liquidprompt"
+# prepend_zshrc "[[ \$- = *i* ]] && source $DOTFILE_DIR/liquidprompt/liquidprompt"
 prepend_zshrc "export PATH=\$ZSH_BIN:\$FASD_BIN:\$PATH"
 prepend_zshrc "export GIT_EDITOR=vim"
 prepend_zshrc "export FASD_BIN=$DOTFILE_DIR/fasd/bin"
+prepend_zshrc "export VIM_CONFIG_PATH=$DOTFILE_DIR"
 prepend_zshrc "export GIT_CONFIG=$DOTFILE_DIR/.gitconfig"
 prepend_zshrc "export DOTFILE_ROOT=$DOTFILE_DIR"
 prepend_zshrc "export ZSH=$DOTFILE_DIR/oh-my-zsh"
 prepend_zshrc "# Generated Environment Variables and PATHs - inherits existing PATH."
 
 # add init function
-INIT_FUNCTION="ds_init() { ZDOTDIR=$DOTFILE_DIR $ZSH_BUILD/bin/zsh ; }"
-echo "$INIT_FUNCTION" >> ~/.bashrc
+INIT_FUNCTION="ds_init() { ZDOTDIR=$DOTFILE_DIR $ZSH_PATH/zsh ; }"
+echo "$INIT_FUNCTION" >> "$HOME/.bashrc"
+echo "ds_init" >> "$HOME/.bashrc"
+
 echo "Type 'ds_init' to initialize with dansuh's custom settings!"
-source ~/.bashrc
+source $HOME/.bashrc

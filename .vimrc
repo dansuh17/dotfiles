@@ -1,8 +1,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom RTP
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" this will make you NOT use ~/.vim but use the alternative path
-let &rtp = substitute(&rtp, $HOME."/\.vim", "$HOME/\.dansuh/\.vim", "g")
+" this will make you use VIM_CONFIG_PATH environment variable as well
+if !empty($VIM_CONFIG_PATH)
+  set rtp+=$VIM_CONFIG_PATH/.vim
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Profiling
