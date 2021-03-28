@@ -119,7 +119,7 @@ set ttyfast  " used for fast redrawing (*removed feature in NeoVim)
 " misc
 set history=700  " remember up to n histories
 set timeoutlen=500  " timeout length on mappings and key codes
-" marks remembered for last 100 files, 3000 line limit to yank,
+" marks remembered for last 100 files, 30000 line limit to yank,
 " registers with more than 100kB text are skipped
 set viminfo='100,<30000,s100
 
