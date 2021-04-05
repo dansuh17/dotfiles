@@ -28,22 +28,22 @@ call plug#begin()
 " the editor is not macvim.
 " Use 'brew install macvim --with-override-system-vim' command
 " to properly install macvim on OSX.
-Plug 'junegunn/fzf'  " fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }  " fuzzy finder
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'  " surround functions
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'ntpeters/vim-better-whitespace'  " whitespace helper
-Plug 'mileszs/ack.vim'  " use silver searcher
-Plug 'w0rp/ale'  " asynchronous linter - vim8 required - use either syntastic or ale not both
-Plug 'itchyny/lightline.vim'  " status line plugin
-Plug 'mgee/lightline-bufferline'  " show buffers to tabline
-Plug 'maximbaz/lightline-ale'  " lightline + ALE
-Plug 'ludovicchabant/vim-gutentags'  " automatic tags file generator
+
+" rainbow brackets
+Plug 'luochen1990/rainbow'
+Plug 'dense-analysis/ale'  " asynchronous linter - vim8 required - use either syntastic or ale not both
+
+" Plug 'tpope/vim-surround'  " surround functions
+" Plug 'ntpeters/vim-better-whitespace'  " whitespace helper
+" Plug 'mileszs/ack.vim'  " use silver searcher
+" Plug 'itchyny/lightline.vim'  " status line plugin
+" Plug 'mgee/lightline-bufferline'  " show buffers to tabline
+" Plug 'maximbaz/lightline-ale'  " lightline + ALE
 
 " language syntax highlighting
-Plug 'neovimhaskell/haskell-vim'  " better syntax highlighting for haskell
-Plug 'deNsuh/python-syntax'  " better python syntax highlighting
+Plug 'dansuh17/python-syntax'  " better python syntax highlighting
 
 " colorschemes - uncomment to use
 Plug 'romainl/Apprentice'  " apprentice
@@ -119,12 +119,11 @@ set ttyfast  " used for fast redrawing (*removed feature in NeoVim)
 " misc
 set history=700  " remember up to n histories
 set timeoutlen=500  " timeout length on mappings and key codes
-" marks remembered for last 100 files, 30000 line limit to yank,
+" marks remembered for last 100 files, 3000 line limit to yank,
 " registers with more than 100kB text are skipped
 set viminfo='100,<30000,s100
 
 " Return to last edit position when opening files (You want this!)
-" WOWW
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " locality and security
@@ -277,10 +276,6 @@ nmap <F8> :!ctags -R .<CR>
 command! MakeTags !ctags -R .
 " use ^] to jump immediately, use g^] for ambiguous tags
 
-" leader mapping
-let mapleader = "-"
-let g:mapleader = "-"
-
 " map Ctrl-c to behave the same as <ESC> (<C-c> will not trigger InsertLeave event)
 " <Esc> is pressed twice since it will wait for 'timeoutlen' millisecs
 " in case there is a mapping with <Esc>.
@@ -292,27 +287,9 @@ nnoremap <leader>ev :vs $MYVIMRC<cr>
 " 's'ourcing my 'v'imrc file
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" commenting out
+" Commenting out
 autocmd FileType javascript nnoremap <C-/> I//<C-c>
 autocmd FileType vim nnoremap <leader>c I"<esc>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" snippets!!
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" invoke read command, (with no extra line '-1') and move the cursor
-" to wanted position
-nnoremap ,html :-1read $HOME/.vim/skel/html<CR>3jwf>a
-" python main
-nnoremap ,pyma :-1read $HOME/.vim/skel/pymain<CR>jA
-" python docstring
-nnoremap ,pydoc :-1read $HOME/.vim/skel/pydoc<CR>j
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Nerdtree Settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let NERDTreeIgnore=['\.pyc$', '\~$']  " ignore these files in NERDTree
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -334,6 +311,19 @@ endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fzf settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" map fzf to ctrl+p
+nnoremap <C-P> :Files<CR>
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+" open buffers with fzf
+nnoremap <Leader>b :Buffers<CR>
+" open history of opened files with fzf
+nnoremap <Leader>h :History<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ale settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " only run the lint during text change in normal mode
@@ -342,27 +332,24 @@ let g:ale_lint_on_text_changed = 'normal'
 " only run the linter when leaving the insert - InsertLeave event
 let g:ale_lint_on_insert_leave = 1
 " 0.5s delay to linter to run after text change
-let g:ale_lint_delay = 500
+let g:ale_lint_delay = 300
 " Enable completion
 let g:ale_completion_enabled = 1
 
 " specific linters
-" python : pip install flake8 pylint pyls
-" haskell : stack install hlint hdevtools hfmt
+" python: pip install pylint flake8
 let g:ale_linters = {
-      \ 'haskell': ['hlint', 'hdevtools', 'hfmt'],
-      \ 'python': ['flake8', 'pyls'],
+      \ 'python': ['pylint', 'flake8'],
       \}
 
-" ignore annoying errors (column length limit)
-let g:ale_python_flake8_options = '--ignore=E501,E266'
+" Autoformatting.
+" python: pip install yapf
+let g:ale_fixers = {
+      \ 'python': ['yapf'],
+      \}
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" fzf settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" map to control-p
-nnoremap <C-p> :Files<CR>
+" Apply autoformatting on save.
+let g:ale_fix_on_save = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -395,34 +382,3 @@ let g:lightline.active = {
       \ }
 let g:lightline.tabline = {'left': [['buffers']], 'right': [['close']]}
 let g:lightline#bufferline#show_number = 1  " show buffer number as in :ls
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" gutentags settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:gutentags_ctags_executable = '/usr/local/bin/ctags'  " [OSX] use brew-installed ctags
-set statusline+=%{gutentags#statusline()}
-augroup MyGutentagsStatusLineRefresher
-  autocmd!
-  autocmd User GutentagsUpdating call lightline#update()
-  autocmd User GutentagsUpdated call lightline#update()
-augroup END
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" haskell-vim settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:haskell_enable_quantification = 1  " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1  " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1  " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1  " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1  " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-let g:haskell_backpack = 1  " to enable highlighting of backpack keywords
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" python-vim settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" enable everything except space highlights
-let python_self_cls_highlight = 1
