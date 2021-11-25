@@ -56,6 +56,25 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=100000
+export SAVEHIST=100000
+
+# Delete old recorded entry if the new entry is a duplicate.
+setopt hist_ignore_all_dups
+# Do not display a line previously found.
+setopt hist_find_no_dups
+# Remove blanks before saving history.
+setopt hist_reduce_blanks
+# Don't beep!
+setopt no_hist_beep
+# Share history between all shell sessions.
+setopt share_history
+# Write history file with format: ":start:elapsed;command".
+setopt extended_history
+# Write to the history file immediately, not when the shell exits.
+setopt inc_append_history
+
 # Custom PATH setting
 export PATH=$(getconf PATH):$PATH
 export PATH=.:$PATH  # add current directory to PATH
