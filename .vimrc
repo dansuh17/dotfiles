@@ -65,7 +65,7 @@ syntax enable
 " Basic Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " formattings and editor functionalities
-set number  " line number
+" set number  " line number
 " `relativenumber` disabled due to slow scrolling (multiple regex function execution happening)
 " set relativenumber
 set autoindent
